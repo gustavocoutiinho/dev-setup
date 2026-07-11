@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--
+  minerdesign · esqueleto de slides 16:9 com o design system da Miner
+  Tokens a preencher via pipeline (references/recipes.md):
+    Fontes: %%F_LIGHT%% %%F_REG%% %%F_DEMI%% %%F_XBOLD%% %%F_SERIF%%
+    Imagens: %%IMG_...%% (jpeg)  Ícones: %%I_...%% (png com alpha)
+  Conteúdo abaixo é DEMONSTRAÇÃO dos componentes: substitua pelo conteúdo real sem alterá-lo.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>TÍTULO | Miner + CLIENTE</title>
+<style>
+@font-face{font-family:'Visby';src:url(data:font/otf;base64,%%F_LIGHT%%) format('opentype');font-weight:300;}
+@font-face{font-family:'Visby';src:url(data:font/otf;base64,%%F_REG%%) format('opentype');font-weight:400;}
+@font-face{font-family:'Visby';src:url(data:font/otf;base64,%%F_DEMI%%) format('opentype');font-weight:600;}
+@font-face{font-family:'Visby';src:url(data:font/otf;base64,%%F_XBOLD%%) format('opentype');font-weight:800;}
+@font-face{font-family:'Nineties';src:url(data:font/otf;base64,%%F_SERIF%%) format('opentype');font-weight:700;}
+:root{
+  --blue:#4562FF;
+  --blue-soft:rgba(69,98,255,.14);
+  --soho:#CBCBCB;
+  --brooklyn:#AEAEAE;
+  --black:#0A0A0B;
+  --panel:#141417;
+  --panel-2:#1B1B1F;
+  --border:#2A2A2F;
+  --text:#F4F4F2;
+  --body:#C6C6C4;
+  --muted:#87878A;
+  --green:#7FD49A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;}
+body{background:var(--black);color:var(--body);font-family:'Visby',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;}
+.slide{width:100vw;height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;background:var(--black);display:flex;flex-direction:column;}
+.serif{font-family:'Nineties',serif;font-weight:700;}
+img.wht{filter:brightness(0) invert(1);}
+
+/* ===== header band ===== */
+.band{display:flex;align-items:center;gap:16px;padding:22px 56px 18px;border-bottom:1px solid var(--border);flex:none;}
+.band .num{width:42px;height:42px;border:2px solid var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff;flex:none;background:var(--blue-soft);}
+.band .bt{font-weight:800;font-size:24px;letter-spacing:1.5px;color:#fff;text-transform:uppercase;}
+.band .sub-bt{font-size:12px;color:var(--muted);margin-left:4px;font-weight:600;}
+.band .miner{margin-left:auto;font-size:21px;color:#fff;}
+.band .miner span{color:var(--blue);}
+.content{flex:1;padding:26px 56px 40px;display:flex;flex-direction:column;min-height:0;gap:16px;}
+.stitle{font-weight:800;font-size:30px;color:#fff;letter-spacing:.2px;line-height:1.1;}
+.stitle em{font-style:normal;color:var(--blue);}
+.ssub{font-size:14px;max-width:1150px;color:var(--body);line-height:1.5;}
+.ssub b{color:#fff;}
+
+/* ===== chips / icons ===== */
+.ico-chip{width:64px;height:64px;background:var(--soho);border-radius:16px;display:flex;align-items:center;justify-content:center;flex:none;}
+.ico-chip img{width:52px;height:52px;object-fit:contain;}
+.ico-chip.sm{width:46px;height:46px;border-radius:12px;}
+.ico-chip.sm img{width:38px;height:38px;}
+.ico-chip.blue{background:var(--blue);}
+
+/* ===== stats ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex:none;}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px 22px;position:relative;overflow:hidden;}
+.stat::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue);}
+.stat .v{font-family:'Nineties',serif;font-size:46px;color:#fff;line-height:1;}
+.stat .v small{font-size:22px;color:var(--blue);}
+.stat .l{font-size:11.5px;color:var(--body);margin-top:8px;line-height:1.4;}
+.stat .l b{color:#fff;}
+
+/* ===== panels & bullets ===== */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0;}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:22px 26px;display:flex;flex-direction:column;min-height:0;}
+.p-head{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex:none;}
+.p-head .pk{font-family:'Nineties',serif;font-size:14px;color:var(--blue);letter-spacing:.5px;}
+.p-head h3{font-weight:800;font-size:20px;color:#fff;text-transform:uppercase;letter-spacing:.6px;line-height:1.1;}
+.p-head .badge{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;padding:5px 11px;border-radius:999px;border:1px solid var(--border);color:var(--muted);white-space:nowrap;}
+.p-head .badge.blue{border-color:var(--blue);color:#fff;background:var(--blue-soft);}
+.p-head .badge.free{border-color:rgba(127,212,154,.5);color:var(--green);}
+.panel ul{list-style:none;flex:1;}
+.panel li{padding:5px 0 5px 18px;position:relative;font-size:13px;line-height:1.5;}
+.panel li::before{content:'→';position:absolute;left:0;top:5px;color:var(--blue);font-weight:800;font-size:11px;}
+.panel li b{color:#fff;font-weight:600;}
+
+/* preço por etapa */
+.price{margin-top:12px;background:var(--blue);border-radius:10px;padding:10px 16px;font-size:13px;color:#fff;font-weight:800;flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.price small{font-weight:600;color:#D9E0FF;font-size:10px;text-transform:uppercase;letter-spacing:.8px;text-align:right;}
+.price.soft{background:var(--panel-2);border:1px solid rgba(69,98,255,.5);}
+
+/* gap strip por módulo */
+.gap{margin-top:14px;background:#10142A;border:1px solid rgba(69,98,255,.4);border-left:4px solid var(--blue);border-radius:12px;padding:12px 16px;flex:none;}
+.gap .g-t{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--blue);margin-bottom:5px;}
+.gap p{font-size:12.5px;line-height:1.5;color:#E4E6F2;}
+.gap p b{color:#fff;}
+.gap .src{margin-top:6px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:700;}
+
+/* ===== capa ===== */
+.cover{flex-direction:row;}
+.cover .c-l{width:56%;padding:52px 56px;display:flex;flex-direction:column;}
+.cover .c-r{width:44%;background-size:cover;background-position:38% center;border-left:1px solid var(--border);}
+.cover .logo{font-size:30px;color:#fff;}
+.cover .logo em{font-style:normal;font-family:'Visby';font-weight:400;font-size:23px;}
+.cover .logo .mk{color:var(--blue);}
+.cover .eyebrow{margin-top:auto;font-weight:800;font-size:12px;letter-spacing:4px;color:var(--blue);text-transform:uppercase;margin-bottom:18px;}
+.cover h1{font-family:'Nineties',serif;font-weight:700;font-size:72px;color:#fff;line-height:1.0;}
+.cover h1 .plus{color:var(--blue);}
+.cover .sub{margin-top:20px;font-size:15.5px;max-width:560px;color:var(--body);line-height:1.6;}
+.cover .meta{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px 32px;padding-top:36px;}
+.cover .meta .l{font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.cover .meta .v{font-size:13.5px;font-weight:600;color:#fff;}
+
+/* ===== sumario ===== */
+.split{flex-direction:row;}
+.split .lft{width:55%;padding:48px 48px 44px 56px;display:flex;flex-direction:column;}
+.split .rgt{width:45%;background-size:cover;background-position:center;border-left:1px solid var(--border);}
+.toc{margin-top:30px;display:flex;flex-direction:column;gap:0;flex:1;justify-content:space-between;}
+.toc .it{display:flex;align-items:center;gap:18px;padding:11px 0;border-bottom:1px solid var(--border);}
+.toc .it:last-child{border-bottom:none;}
+.toc .n{font-family:'Nineties',serif;font-size:22px;color:var(--blue);width:44px;flex:none;}
+.toc .t{font-weight:800;font-size:20px;color:#fff;text-transform:uppercase;letter-spacing:1px;}
+.toc .d{margin-left:auto;font-size:11px;color:var(--muted);text-align:right;max-width:220px;}
+.confid{margin-top:22px;font-size:10.5px;color:var(--muted);line-height:1.55;}
+
+/* ===== dores ===== */
+.dores-wrap{display:grid;grid-template-columns:300px 1fr;gap:16px;flex:1;min-height:0;}
+.meter{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;position:relative;overflow:hidden;}
+.meter .big{font-family:'Nineties',serif;font-size:110px;color:#fff;line-height:.9;}
+.meter .big span{color:var(--blue);font-size:54px;}
+.meter .lbl{font-size:13px;color:var(--body);margin-top:12px;line-height:1.5;}
+.meter .dots{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px;width:100%;}
+.meter .dot{height:14px;border-radius:4px;background:var(--blue);}
+.meter .dot.off{background:var(--border);}
+.meter .src{margin-top:18px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:12px;min-height:0;}
+.dor{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;}
+.dor .dt{color:#fff;font-weight:700;font-size:16px;line-height:1.25;}
+.dor .dr{font-size:11px;color:var(--muted);margin-top:auto;padding-top:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:700;}
+.dor .dr b{color:var(--blue);font-weight:800;display:block;font-size:14.5px;margin-top:3px;letter-spacing:.2px;}
+
+/* ===== tabela mercado ===== */
+.tbl{border:1px solid var(--border);border-radius:16px;overflow:hidden;flex:1;display:flex;}
+table{width:100%;border-collapse:collapse;}
+th{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:800;text-align:left;padding:12px 16px;background:var(--panel-2);}
+td{padding:11px 16px;border-top:1px solid var(--border);font-size:12px;line-height:1.45;vertical-align:middle;background:var(--panel);}
+td.nome{color:#fff;font-weight:600;font-size:12.5px;}
+td .mini{display:block;font-size:10px;color:var(--muted);margin-top:2px;font-weight:400;}
+td .nuc{display:block;margin-top:6px;font-size:14.5px;font-weight:800;letter-spacing:.4px;color:var(--blue);text-transform:uppercase;}
+td.free{color:var(--green);font-weight:800;letter-spacing:1px;font-size:10.5px;}
+.mark{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:1px;}
+.mark.on{background:var(--blue);}
+.mark.off{background:transparent;border:2px solid var(--muted);}
+.tnote{font-size:10px;color:var(--muted);line-height:1.5;flex:none;}
+.tnote b{color:var(--body);}
+
+/* ===== statement ===== */
+.statement{flex-direction:row;}
+.statement .img{width:42%;background-size:cover;background-position:center;border-right:1px solid var(--border);}
+.statement .txt{width:58%;display:flex;flex-direction:column;justify-content:center;padding:64px;gap:26px;}
+.statement h2{font-family:'Nineties',serif;font-weight:700;font-size:58px;color:#fff;line-height:1.05;}
+.statement h2 .b{color:var(--blue);}
+.statement p{font-size:15.5px;line-height:1.65;max-width:600px;}
+.statement p b{color:#fff;}
+.chips{display:flex;gap:12px;flex-wrap:wrap;}
+.chip{border:1px solid var(--border);background:var(--panel);border-radius:999px;padding:9px 18px;font-size:12px;color:#fff;font-weight:600;}
+.chip b{color:var(--blue);}
+
+/* ===== cases/charts ===== */
+.case-grid{display:grid;grid-template-columns:1.1fr 1.1fr .8fr;gap:16px;flex:1;min-height:0;}
+.case{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;}
+.case .big{font-family:'Nineties',serif;font-size:34px;color:#fff;line-height:1.05;}
+.case .big span{color:var(--blue);}
+.case .lbl{font-size:11.5px;margin-top:6px;line-height:1.5;color:var(--body);}
+.case svg{margin-top:auto;width:100%;}
+.case .src{font-size:9px;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:1px;font-weight:700;}
+.case.img{padding:0;background-size:cover;background-position:center;border:1px solid var(--border);}
+
+/* ===== hub / diagrams ===== */
+.hub-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;flex:1;min-height:0;}
+.hub-panel{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:10px;display:flex;align-items:center;justify-content:center;}
+.hub-panel svg{width:100%;height:100%;max-height:520px;}
+.side-img{border-radius:18px;border:1px solid var(--border);background-size:cover;background-position:30% 25%;}
+
+/* ===== timeline ===== */
+.tl-svg{flex:none;}
+.fases{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex:1;min-height:0;}
+.fase{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;}
+.fase.hl{border-color:rgba(69,98,255,.55);background:linear-gradient(180deg,#12162e,var(--panel));}
+.fase .fn{font-family:'Nineties',serif;font-size:13px;color:var(--blue);}
+.fase h3{font-weight:800;font-size:16px;color:#fff;margin:6px 0 2px;text-transform:uppercase;line-height:1.15;}
+.fase .fp{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:10px;}
+.fase ul{list-style:none;}
+.fase li{padding:4px 0 4px 15px;position:relative;font-size:11.5px;line-height:1.45;}
+.fase li::before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--blue);}
+
+/* ===== investimento ===== */
+.inv-grid{display:grid;grid-template-columns:1.55fr .45fr;gap:16px;flex:1;min-height:0;}
+.inv-side{display:flex;flex-direction:column;gap:12px;}
+.ibox{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px 20px;flex:1;display:flex;flex-direction:column;justify-content:center;}
+.ibox .l{font-size:9.5px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:800;margin-bottom:5px;}
+.ibox .v{font-family:'Nineties',serif;font-size:24px;color:#fff;line-height:1;}
+.ibox.hl{background:linear-gradient(135deg,#1B2354,#12163A);border-color:rgba(69,98,255,.6);}
+.ibox.hl .v{font-size:28px;}
+.ibox.hl .v em{font-style:normal;color:var(--blue);font-size:14px;}
+.ibox .s{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4;}
+.comp-bar{flex:none;}
+.comp-bar .cb-t{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.cb{display:flex;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.cb div{display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;color:#fff;letter-spacing:.4px;white-space:nowrap;overflow:hidden;}
+.cb-leg{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:9.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
+.cb-leg i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;}
+
+/* ===== condicoes ===== */
+.cond-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex:none;}
+.cond{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;}
+.cond h3{font-weight:800;font-size:14px;color:#fff;text-transform:uppercase;letter-spacing:.5px;line-height:1.25;}
+.cond p{font-size:11.5px;line-height:1.55;}
+.strip{background:#10142A;border:1px solid rgba(69,98,255,.4);border-radius:12px;padding:13px 18px;font-size:12.5px;color:#E4E6F2;line-height:1.55;flex:none;}
+.strip b{color:var(--blue);}
+.strip.green{background:#0F1A14;border-color:rgba(127,212,154,.4);}
+.strip.green b{color:var(--green);}
+
+/* ===== start ===== */
+.start-slide{background-size:cover;background-position:center 32%;justify-content:flex-end;}
+.start-slide .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.25),rgba(10,10,11,.9) 72%);}
+.start-slide>*{position:relative;z-index:2;}
+.start-slide .big{padding:0 56px;font-weight:800;font-size:104px;color:#fff;line-height:.92;text-transform:uppercase;letter-spacing:-1px;}
+.start-slide .big span{color:var(--blue);}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:28px 56px 48px;}
+.step{background:rgba(20,20,23,.92);border:1px solid var(--border);border-radius:14px;padding:16px 20px;}
+.step h3{font-weight:800;font-size:13.5px;color:#fff;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.step h3 span{color:var(--blue);}
+.step p{font-size:11.5px;line-height:1.5;}
+
+/* ===== contracapa ===== */
+.back{align-items:center;justify-content:center;text-align:center;gap:8px;}
+.back .dv{font-family:'Nineties',serif;font-weight:700;font-size:66px;color:#fff;}
+.back .dv .p{color:var(--blue);}
+.back .tag{font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:var(--muted);font-weight:800;margin-top:6px;}
+.back .lg{margin-top:36px;font-size:30px;color:#fff;}
+.back .lg em{font-style:normal;font-family:'Visby';font-weight:400;font-size:23px;}
+.back .site{margin-top:8px;font-size:13px;color:var(--brooklyn);font-weight:600;}
+
+/* o que faremos: fontes maiores */
+.of .stitle{font-size:36px;}
+.of .ssub{font-size:16px;line-height:1.55;}
+.of .panel li{font-size:15px;padding:8px 0 8px 22px;line-height:1.55;}
+.of .panel li::before{top:8px;}
+.of .p-head h3{font-size:23px;}
+
+.pagenum{position:fixed;bottom:14px;right:20px;font-size:11px;color:var(--muted);z-index:50;font-weight:700;}
+@media print{
+  @page{size:13.333in 7.5in;margin:0;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  html{scroll-snap-type:none;}
+  html,body{background:var(--black);}
+  .slide{width:13.333in;height:7.5in;page-break-after:always;break-inside:avoid;}
+  .slide:last-of-type{page-break-after:auto;}
+  .pagenum{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- CAPA: split com foto do KV à direita (ponto focal no letreiro) -->
+<section class="slide cover">
+  <div class="c-l">
+    <div class="logo serif">Miner <em>Company</em> <span class="mk">▲</span></div>
+    <div class="eyebrow">Eyebrow · Contexto</div>
+    <h1>Miner <span class="plus">+</span><br>Cliente</h1>
+    <p class="sub">Uma frase de posicionamento do material.</p>
+    <div class="meta">
+      <div><div class="l">Preparada para</div><div class="v">Nome · Empresa</div></div>
+      <div><div class="l">Elaborada por</div><div class="v">Gustavo Coutinho · Miner</div></div>
+    </div>
+  </div>
+  <div class="c-r" style="background-image:url(data:image/jpeg;base64,%%IMG_CAPA%%);"></div>
+</section>
+
+<!-- SLIDE PADRÃO: header band + stats + painéis com ícone -->
+<section class="slide">
+  <div class="band"><div class="num">01</div><div class="bt">Seção</div><div class="sub-bt">subtítulo da seção</div><div class="miner serif">Miner <span>▲</span></div></div>
+  <div class="content">
+    <div class="stitle">Título com <em>destaque azul.</em></div>
+    <div class="stats">
+      <div class="stat"><div class="v">50<small>+</small></div><div class="l"><b>Lead do stat</b> e complemento curto</div></div>
+      <div class="stat"><div class="v">98 → 590</div><div class="l"><b>Outro número âncora</b> em serif gigante</div></div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <div class="p-head"><div class="ico-chip sm"><img src="data:image/png;base64,%%I_ICONE%%" alt=""></div><h3>Painel com ícone</h3></div>
+        <ul>
+          <li><b>Lead em bold branco:</b> complemento do bullet em corpo</li>
+          <li>Bullet simples com seta azul automática</li>
+        </ul>
+        <div class="price">R$ 0.000,00 /mês<small>Detalhe do preço</small></div>
+        <div class="gap">
+          <div class="g-t">O mercado faz · o cliente ainda não</div>
+          <p>Gap competitivo com <b>destaque.</b></p>
+          <div class="src">Fonte: sempre citar a fonte do dado</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="p-head"><div class="ico-chip sm"><img src="data:image/png;base64,%%I_ICONE%%" alt=""></div><h3>Segundo painel</h3><span class="badge free">Sem custo</span></div>
+        <ul><li>Verde é exclusivo de incluso/free/bônus</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT: foto lateral + frase gigante em serif -->
+<section class="slide statement">
+  <div class="img" style="background-image:url(data:image/jpeg;base64,%%IMG_LATERAL%%);"></div>
+  <div class="txt">
+    <h2>(Frase <span class="b">+</span> de impacto)</h2>
+    <p><b>Abertura em bold.</b> Corpo do statement.</p>
+    <div class="chips"><div class="chip"><b>10 anos</b> de operação</div><div class="chip"><b>19 plataformas</b></div></div>
+  </div>
+</section>
+
+<!-- FECHO: foto full-bleed + It's ready? -->
+<section class="slide start-slide" style="background-image:url(data:image/jpeg;base64,%%IMG_FECHO%%);">
+  <div class="ov"></div>
+  <div class="band" style="border-bottom-color:rgba(255,255,255,.15);"><div class="num">07</div><div class="bt">Start</div><div class="miner serif">Miner <span>▲</span></div></div>
+  <div style="flex:1;"></div>
+  <div class="big">It's <span>ready?</span></div>
+  <div class="steps">
+    <div class="step"><h3><span>1 ·</span> Passo</h3><p>Descrição.</p></div>
+    <div class="step"><h3><span>2 ·</span> Passo</h3><p>Descrição.</p></div>
+    <div class="step"><h3><span>3 ·</span> Passo</h3><p>Descrição.</p></div>
+  </div>
+</section>
+
+<!-- CONTRACAPA -->
+<section class="slide back">
+  <div>
+    <div class="dv">(Dados <span class="p">+</span> Vendas)</div>
+    <div class="tag">It's all in data</div>
+    <div class="lg serif">Miner <em>Company</em> <span style="color:var(--blue);">▲</span></div>
+    <div class="site">minerbz.com.br · gustavo@minerbz.com.br</div>
+  </div>
+</section>
+
+<div class="pagenum" id="pg">1 / 5</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const pg=document.getElementById('pg');
+let cur=0;
+function go(i){cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].scrollIntoView({behavior:'smooth'});}
+document.addEventListener('keydown',e=>{
+  if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
+  if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+});
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){cur=slides.indexOf(en.target);pg.textContent=(cur+1)+' / '+slides.length;}})},{threshold:.6});
+slides.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "superpowers@superpowers-dev": true,
+    "vercel@claude-plugins-official": true,
+    "cloudflare@jezweb-skills": true,
+    "web-design@jezweb-skills": true,
+    "frontend@jezweb-skills": true,
+    "design-assets@jezweb-skills": true,
+    "integrations@jezweb-skills": true,
+    "dev-tools@jezweb-skills": true,
+    "writing@jezweb-skills": true,
+    "shopify@jezweb-skills": true,
+    "wordpress@jezweb-skills": true,
+    "social-media@jezweb-skills": true,
+    "liquid-skills@liquid-skills": true,
+    "liquid-lsp@liquid-skills": true,
+    "opendirectory-gtm-skills@opendirectory-marketplace": true,
+    "hormozi-skills@hormozi-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "superpowers-dev": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      }
+    },
+    "liquid-skills": {
+      "source": {
+        "source": "github",
+        "repo": "Shopify/liquid-skills"
+      }
+    },
+    "jezweb-skills": {
+      "source": {
+        "source": "github",
+        "repo": "jezweb/claude-skills"
+      }
+    },
+    "ai-business-skills": {
+      "source": {
+        "source": "github",
+        "repo": "minhnv0807/ai-business-skills"
+      }
+    },
+    "opendirectory-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "Varnan-Tech/opendirectory"
+      }
+    },
+    "hormozi-skills": {
+      "source": {
+        "source": "github",
+        "repo": "alexsmedile/hormozi-skills"
+      }
+    }
+  }
+}

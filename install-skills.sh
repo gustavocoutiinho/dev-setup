@@ -51,5 +51,28 @@ else
   echo "!! jq não encontrado: adicione \"language\": \"português brasileiro\" manualmente em $SETTINGS"
 fi
 
+# --- Plugins de marketplace do Claude Code (merge idempotente no settings.json) ---
+MANIFEST="$DIR/plugins.json"
+if [ -f "$MANIFEST" ] && command -v python3 >/dev/null 2>&1; then
+  python3 - "$SETTINGS" "$MANIFEST" <<'PY'
+import json, os, sys
+settings_path, manifest_path = sys.argv[1], sys.argv[2]
+manifest = json.load(open(manifest_path))
+settings = {}
+if os.path.exists(settings_path):
+    try: settings = json.load(open(settings_path))
+    except Exception: settings = {}
+ep = settings.setdefault("enabledPlugins", {})
+for k, v in manifest.get("enabledPlugins", {}).items(): ep[k] = v
+mk = settings.setdefault("extraKnownMarketplaces", {})
+for k, v in manifest.get("extraKnownMarketplaces", {}).items(): mk[k] = v
+os.makedirs(os.path.dirname(settings_path), exist_ok=True)
+json.dump(settings, open(settings_path, "w"), indent=2, ensure_ascii=False)
+print(f"==> plugins: {len(ep)} habilitados, {len(mk)} marketplaces (reinicie o Claude Code p/ baixar)")
+PY
+else
+  echo "!! plugins.json ausente ou sem python3: plugins de marketplace nao aplicados"
+fi
+
 echo "==> Pronto. Skills em $DEST:"
 ls "$DEST"

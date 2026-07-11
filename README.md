@@ -27,6 +27,22 @@ O script faz:
 
 Idempotente: pode rodar quantas vezes quiser. Em repos já clonados faz `git fetch + pull --rebase`.
 
+## Skills + plugins do Claude Code
+
+Depois do bootstrap (ou a qualquer momento), sincronize skills e plugins entre os Macs:
+
+```bash
+cd ~/dev/dev-setup && git pull && ./install-skills.sh
+```
+
+O `install-skills.sh` (idempotente) instala:
+
+- **11 skills custom** de `skills/` → `~/.claude/skills/` (adkit, google-ads-strategy, meta-ads-analyzer, meta-ads-strategy, miner-context, minerdesign, obsidianminer, relatorio-accs, sf-apex-development, sf-cli-deployment, sf-lwc-development) e remove as fundidas antigas (cerebro-miner, vault-context).
+- **CLAUDE.md global** + `language = português brasileiro` no `~/.claude/settings.json`.
+- **17 plugins de marketplace + 7 marketplaces** (de `plugins.json`), via merge que **preserva** o que a máquina já tem. Reinicie o Claude Code depois pra baixar os plugins.
+
+> Ganhou uma skill nova numa máquina? Copie pra `skills/`, `git add -A && git commit && git push`, e na outra `git pull && ./install-skills.sh`. Os **connectors da conta** (Notion, Asana, Gmail, etc.) não entram aqui: sincronizam sozinhos pelo login `claude.ai`.
+
 ## Pendências manuais (humano faz)
 
 1. **Obsidian Sync**: abrir Obsidian, logar com `gustavo@minerbz.com.br`, ativar Sync, cofre remoto `miner`, pasta local `~/ObsidianVaults/miner` (FORA do iCloud).
