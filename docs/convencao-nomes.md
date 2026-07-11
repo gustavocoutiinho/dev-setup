@@ -159,7 +159,7 @@ crms), sempre com a URL antiga viva.
 - `miner-financeiro` → `app-financeiro`
 
 ### ✅ Feito (2ª rodada — repos, sem tocar Vercel; URLs custom intactas)
-- **`deck-accs`** (era accs-proposta; acomkt.minerbz.com.br intacto) + pasta `decks/`
+- **`deck-accs`** (era accs-proposta) + pasta `decks/`. ⚠️ **Caso especial:** o deck ACCS ao vivo (`acomkt.minerbz.com.br`) é servido por um projeto Vercel SEPARADO `acomkt-deck` **com gate de "Acesso restrito"** — a pasta local (`accs-proposta`, que dá 404) NÃO é a fonte. Favicon Miner do deck-accs ao vivo pendente (não deployar a pasta por cima sem preservar o gate).
 - **Portais/base:** `portal-mig` `portal-content` `portal-miner-base` (rename repo) · `portal-accs` (já canônico, + topics; portal.minerbz.com.br 200)
 - **`crm-normatel`** (era normatel-premium; rename repo — pasta local suja, mover quando limpa)
 
@@ -170,6 +170,6 @@ crms), sempre com a URL antiga viva.
 - ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
 
 ### 📋 Passes dedicados (à parte)
-- **Favicon Miner** em cada asset com frontend (editar HTML + re-deploy; URL não muda). Set oficial a montar em `dev-setup/assets/favicon-miner/`.
+- **Favicon Miner:** set oficial montado em `dev-setup/assets/favicon-miner/` ✅. Aplicado + deployado (URL intacta) em **5 decks**: `deck-barneys` `deck-estela` `deck-otorhinos` `deck-normatel` `deck-lesalis` ✅. Decisão: favicon Miner em TUDO (troca o logo do cliente na aba). Pendente: `deck-accs` (gate acomkt-deck), portais/apps de cliente (no checkpoint).
 - **`site-miner` na Vercel:** renomear quando definir o domínio custom do site.
 - **ollis-proposta:** só existe na Vercel (`.vercel.app`), sem repo/pasta — nada a padronizar fora da Vercel.
