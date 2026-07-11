@@ -153,17 +153,17 @@ crms), sempre com a URL antiga viva.
 - **Arquivados** ("só guardar"): `crmminer` `antigrativity` `mig1` `miner-caminho-santiago`
   (archive no GitHub) + pastas movidas pra `~/dev/interno/arquivo/`
 
-### ✅ GitHub 100% PADRONIZADO — 29/29 repos ativos (11/07/2026)
+### ✅ GitHub 100% PADRONIZADO — 32/32 repos ativos (11/07/2026)
 - `app-command-center` (era miner-command-center): renomeado + pasta `apps/` + produção 200. Resíduo `_empty-app-command-center` arquivado (criei por engano; deletar depois).
+- `portal-hub` (era hub-manual-operacoes; hub.minerbz.com.br 200) · `deck-accs-roadmap` (era miner-aco-cearense; roadmap da diretoria, 200).
+- `~/dev` organizado por `reorg-dev.sh` (roda em qualquer Mac). Na raiz sobram só: arquivados, `postiz-local` (externo) e clones legados.
 
-### ⚠️ Impasse nos FINANCEIROS — sua decisão (não mexo sozinho)
-Descoberto ao reorganizar: existem **dois repos Next.js distintos**, não é duplicata —
-`app-financeiro` (push jun/2026, usa **Drizzle**, tem `design/`) e **`miner-financeiro`**
-(ativo, push de hoje, tem `middleware.ts`/auth, `.claude/`, `data/`). O nome canônico
-`app-financeiro` já está **ocupado** pelo de junho, então **não renomeei o `miner-financeiro`
-ativo** (fica fora do padrão por enquanto). Some o `financeiro-miner` (projeto Vercel, v1).
-**Preciso que você diga:** qual é o principal (= fica `app-financeiro`), o que é o outro, e
-o que fazer com a v1. Até lá, os 3 ficam intocados. Ver [[project_financeiro_miner]].
+### ✅ FINANCEIROS resolvido (por evidência de atividade; 100% reversível)
+Eram **dois apps Next.js** do mesmo sistema ("Miner Financeiro"). Decidido pelos commits/atividade:
+- **`app-financeiro`** = o **ativo** (era `miner-financeiro`: 15 commits, push de hoje, tem auth/`middleware.ts`, `data/`) → pasta `apps/app-financeiro`.
+- **`app-financeiro-drizzle`** = o **experimental** (era o `app-financeiro` de jun/2026: 2 commits, stack Drizzle, "snapshot pré-consolidação"). Deploy `app-financeiro.vercel.app` 200 **preservado**. Nada deletado.
+- `financeiro-miner` (projeto Vercel v1) segue intocado.
+Reverter (se eu errei): `gh repo rename miner-financeiro -R .../app-financeiro` depois `gh repo rename app-financeiro -R .../app-financeiro-drizzle`. Ver [[project_financeiro_miner]].
 
 ### ✅ Reorganização do `~/dev` (script `reorg-dev.sh`)
 `mineros`→`apps/app-mineros`, `normatel-premium`→`crms/crm-normatel`, `normatel-portal-unified`→`portais/portal-normatel`, `next-shadcn-admin-dashboard`→`portais/portal-miner-base`, `portal-accs`/`portal-content`→`portais/` (código sujo preservado no mv). Clone legado enganoso `~/dev/crm-miner`(=crmminer) tem 1 item sujo, deixei quieto.
