@@ -170,13 +170,13 @@ crms), sempre com a URL antiga viva.
 - **Renomeados:** `crm-miner-backup` (era minercrm-private) · `portal-normatel` (era normatel-portal; normatel.vercel.app 200 intacto) · `site-prls` (era prls-os).
 - **Arquivados** (legado jan/2026, fora de uso): `porao` `dashboard-financeiro` `miner-proposta-porao`.
 
-### ⏳ Colisão de slug — cliente com >1 projeto do mesmo tipo (sua decisão de qualificador)
-Não toquei (são projetos reais e distintos, com `server.js`/deploy):
-- `miner-normatel` = 2º portal Normatel (B2B "Projetos Digitais", login/api) vs `portal-normatel` → `portal-normatel-b2b`?
-- `miner-proposta-normatel` = 2º deck Normatel (Instagram orgânico) vs `deck-normatel` → `deck-normatel-instagram`?
-- `miner-proposta-acocearense` = Central de Atendimento ACO (server.js) → `portal-accs-central`?
+### ✅ Colisão de slug — resolvida com qualificador (repo only; ajuste se quiser)
+Cliente com >1 projeto do mesmo tipo → acrescentei qualificador (rename reversível, produção intocada):
+- `portal-normatel-b2b` (era miner-normatel; 2º portal Normatel, B2B/login/api)
+- `deck-normatel-instagram` (era miner-proposta-normatel; IG orgânico)
+- `deck-accs-central` (era miner-proposta-acocearense; central de atendimento — tem `server.js`, se preferir `portal-accs-central` é só avisar)
 
-Regra proposta: quando há >1 do mesmo `tipo+cliente`, acrescentar qualificador (ex: `deck-normatel-instagram`).
+Regra fixada: quando há >1 do mesmo `tipo+cliente`, acrescentar qualificador.
 
 ### ⏳ Resta (passe cuidadoso / fora do meu alcance seguro)
 - **Favicon em produção:** portais, apps, `crm-miner` (editar + deploy de produção ativa) e `deck-accs` (gate `acomkt-deck`).
