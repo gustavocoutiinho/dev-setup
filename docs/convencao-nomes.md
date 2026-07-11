@@ -139,3 +139,31 @@ GitHub `miner-website`→`site-miner` (redirect automático) · `git remote` + p
 `~/dev/sites/site-miner` · Vercel renomeia mantendo o `.vercel.app` antigo vivo · favicon
 Miner · topics `site`+`miner`. Você confere, e aí escalo por tipo (decks → apps → portais →
 crms), sempre com a URL antiga viva.
+
+---
+
+## 6. Status de execução (11/07/2026)
+
+### ✅ Feito (grupos seguros — nenhuma URL de cliente tocada)
+- **Piloto:** `site-miner` (versionado + pasta `sites/` + topics; URL de prod 200 intacta)
+- **Decks:** `deck-barneys` `deck-estela` `deck-normatel` `deck-otorhinos` `deck-lesalis`
+  (GitHub renomeado/criado + pasta `decks/` + topics; Vercel **intocada**, `.vercel.app` vivos)
+- **Apps:** `app-pim` (era pimfood-onboard-zen) · `app-foryou-olist` (rename repo)
+- **MCPs/bot:** `mcp-blip` · `mcp-whatsapp` · `bot-telegram` (era `-miner-bot`)
+- **Arquivados** ("só guardar"): `crmminer` `antigrativity` `mig1` `miner-caminho-santiago`
+  (archive no GitHub) + pastas movidas pra `~/dev/interno/arquivo/`
+
+### ⏸️ Pulado — git sujo (trabalho não commitado; commitar antes pra eu não atropelar)
+- `miner-command-center` → `app-command-center`
+- `mineros` → `app-mineros`
+- `miner-financeiro` → `app-financeiro`
+
+### ⏳ Próximo checkpoint (produção de cliente — não tocado ainda)
+- **Portais** (domínio custom, rename Vercel seguro): `portal-accs` `portal-mig` `portal-mslz` `portal-content` `portal-miner-base`
+- **CRMs:** `crm-miner` (minercrm) · `crm-normatel` (normatel-premium)
+- **`deck-accs`** (accs-proposta, tem domínio custom acomkt.minerbz.com.br)
+
+### 📋 Passes dedicados (à parte)
+- **Favicon Miner** em cada asset com frontend (editar HTML + re-deploy; URL não muda). Set oficial a montar em `dev-setup/assets/favicon-miner/`.
+- **`site-miner` na Vercel:** renomear quando definir o domínio custom do site.
+- **ollis-proposta:** só existe na Vercel (`.vercel.app`), sem repo/pasta — nada a padronizar fora da Vercel.
