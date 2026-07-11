@@ -153,9 +153,13 @@ crms), sempre com a URL antiga viva.
 - **Arquivados** ("só guardar"): `crmminer` `antigrativity` `mig1` `miner-caminho-santiago`
   (archive no GitHub) + pastas movidas pra `~/dev/interno/arquivo/`
 
-### ⏸️ A fechar quando você commitar o trabalho pendente (git sujo)
-- `app-mineros` (era mineros) e `app-financeiro` (era miner-financeiro): **repo já renomeado**; falta mover a pasta pra `apps/` e atualizar o `git remote` (aponta pro nome antigo, que redireciona).
-- `app-command-center` (miner-command-center): **sem repo GitHub** (não versionado) + pasta suja — versionar depois de commitar.
+### ✅ GitHub 100% PADRONIZADO — 29/29 repos ativos (11/07/2026)
+- `app-command-center` (era miner-command-center): renomeado + pasta `apps/` + produção 200. Resíduo `_empty-app-command-center` arquivado (criei por engano; deletar depois).
+
+### ⏸️ Só falta mover 2 pastas LOCAIS (repo GitHub já ok; código seu não commitado)
+- `~/dev/mineros` → `apps/app-mineros`: código não commitado (src/index.js, shopify.js, alertas.js + novos).
+- `~/dev/miner-financeiro` → `apps/app-financeiro`: `.gitignore` mudado + [[project_financeiro_miner]] alerta sessões paralelas.
+Quando você commitar, eu movo a pasta + atualizo o `git remote` (hoje aponta pro nome antigo, que redireciona).
 
 ### ✅ Feito (2ª rodada — repos, sem tocar Vercel; URLs custom intactas)
 - **`deck-accs`** (era accs-proposta) + pasta `decks/`. ⚠️ **Caso especial:** o deck ACCS ao vivo (`acomkt.minerbz.com.br`) é servido por um projeto Vercel SEPARADO `acomkt-deck` **com gate de "Acesso restrito"** — a pasta local (`accs-proposta`, que dá 404) NÃO é a fonte. Favicon Miner do deck-accs ao vivo pendente (não deployar a pasta por cima sem preservar o gate).
@@ -180,7 +184,8 @@ Regra fixada: quando há >1 do mesmo `tipo+cliente`, acrescentar qualificador.
 
 ### ⏳ Resta (passe cuidadoso / fora do meu alcance seguro)
 - **Favicon em produção:** portais, apps, `crm-miner` (editar + deploy de produção ativa) e `deck-accs` (gate `acomkt-deck`).
-- `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel) · `claude-setup` (duplicado meu — deletar no GitHub, falta `delete_repo` scope).
+- `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel).
+- **Deletar no GitHub** (arquivados, resíduos meus — falta `delete_repo` scope): `claude-setup` · `_empty-app-command-center`. Comando: `gh auth refresh -h github.com -s delete_repo && gh repo delete gustavocoutiinho/<nome> --yes`.
 - ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
 
 ### 📋 Passes dedicados (à parte)
