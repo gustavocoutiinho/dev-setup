@@ -158,10 +158,16 @@ crms), sempre com a URL antiga viva.
 - `mineros` → `app-mineros`
 - `miner-financeiro` → `app-financeiro`
 
-### ⏳ Próximo checkpoint (produção de cliente — não tocado ainda)
-- **Portais** (domínio custom, rename Vercel seguro): `portal-accs` `portal-mig` `portal-mslz` `portal-content` `portal-miner-base`
-- **CRMs:** `crm-miner` (minercrm) · `crm-normatel` (normatel-premium)
-- **`deck-accs`** (accs-proposta, tem domínio custom acomkt.minerbz.com.br)
+### ✅ Feito (2ª rodada — repos, sem tocar Vercel; URLs custom intactas)
+- **`deck-accs`** (era accs-proposta; acomkt.minerbz.com.br intacto) + pasta `decks/`
+- **Portais/base:** `portal-mig` `portal-content` `portal-miner-base` (rename repo) · `portal-accs` (já canônico, + topics; portal.minerbz.com.br 200)
+- **`crm-normatel`** (era normatel-premium; rename repo — pasta local suja, mover quando limpa)
+
+### ⏳ Precisa de você / coordenação (não toquei)
+- **`minercrm` → `crm-miner`:** mantido junto com o **Thales** (renomear afeta o fluxo dele) E `minercrm.vercel.app` é usada no **OAuth do Bling da PRLS** (não renomear o projeto Vercel). Coordenar antes.
+- **`festival`:** definir o tipo canônico (`app-festival`? `portal-festival`?) antes de renomear.
+- **Apps git sujo:** `app-command-center` `app-mineros` `app-financeiro` (commitar antes).
+- ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
 
 ### 📋 Passes dedicados (à parte)
 - **Favicon Miner** em cada asset com frontend (editar HTML + re-deploy; URL não muda). Set oficial a montar em `dev-setup/assets/favicon-miner/`.
