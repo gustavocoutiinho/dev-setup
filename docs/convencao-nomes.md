@@ -98,7 +98,7 @@ otorhinos · lesalis · festival · mslz (Grupo São Luiz) · pim · **miner** (
 ### Sites
 | Canônico | GitHub hoje | Vercel hoje | ~/dev hoje | URL prod |
 |---|---|---|---|---|
-| `site-miner` | (Lovable?) ⚙️ | miner-website 📎 | miner-website | miner-website-beta.vercel.app |
+| `site-miner` ✅ | site-miner (novo, versionado) | miner-website 📎 (mantido: URL viva) | sites/site-miner | miner-website-beta.vercel.app (200) |
 
 ### Apps internos
 | Canônico | GitHub hoje | Vercel hoje | ~/dev hoje | Nota |
