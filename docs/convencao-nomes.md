@@ -166,9 +166,21 @@ crms), sempre com a URL antiga viva.
 - **`crm-miner`** (era minercrm): rename **do repo** + pasta → `~/dev/crms/crm-miner`. Projeto Vercel **intocado** (OAuth Bling da PRLS vivo); produção `minercrm.vercel.app` 200. ⚠️ **avisar o Thales** do nome novo (o redirect cobre enquanto isso).
 - **`app-festival`** (era festival-costume-gourmet): repo + pasta → `~/dev/apps/app-festival`. Vercel intocada (DNS custom fora).
 
+### ✅ Feito (4ª rodada) + arquivados
+- **Renomeados:** `crm-miner-backup` (era minercrm-private) · `portal-normatel` (era normatel-portal; normatel.vercel.app 200 intacto) · `site-prls` (era prls-os).
+- **Arquivados** (legado jan/2026, fora de uso): `porao` `dashboard-financeiro` `miner-proposta-porao`.
+
+### ⏳ Colisão de slug — cliente com >1 projeto do mesmo tipo (sua decisão de qualificador)
+Não toquei (são projetos reais e distintos, com `server.js`/deploy):
+- `miner-normatel` = 2º portal Normatel (B2B "Projetos Digitais", login/api) vs `portal-normatel` → `portal-normatel-b2b`?
+- `miner-proposta-normatel` = 2º deck Normatel (Instagram orgânico) vs `deck-normatel` → `deck-normatel-instagram`?
+- `miner-proposta-acocearense` = Central de Atendimento ACO (server.js) → `portal-accs-central`?
+
+Regra proposta: quando há >1 do mesmo `tipo+cliente`, acrescentar qualificador (ex: `deck-normatel-instagram`).
+
 ### ⏳ Resta (passe cuidadoso / fora do meu alcance seguro)
 - **Favicon em produção:** portais, apps, `crm-miner` (editar + deploy de produção ativa) e `deck-accs` (gate `acomkt-deck`).
-- `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel).
+- `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel) · `claude-setup` (duplicado meu — deletar no GitHub, falta `delete_repo` scope).
 - ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
 
 ### 📋 Passes dedicados (à parte)
