@@ -164,7 +164,7 @@ crms), sempre com a URL antiga viva.
 - **`crm-normatel`** (era normatel-premium; rename repo — pasta local suja, mover quando limpa)
 
 ### ⏳ Precisa de você / coordenação (não toquei)
-- **`minercrm` → `crm-miner`:** mantido junto com o **Thales** (renomear afeta o fluxo dele) E `minercrm.vercel.app` é usada no **OAuth do Bling da PRLS** (não renomear o projeto Vercel). Coordenar antes.
+- **`minercrm` → `crm-miner`:** mantido junto com o **Thales** (renomear afeta o fluxo dele) E `minercrm.vercel.app` é usada no **OAuth do Bling da PRLS** (não renomear o projeto Vercel). Coordenar antes. *(Nome `crm-miner` já liberado: o repo legado homônimo virou `crm-miner-legado` e foi arquivado. `minercrm-private` = futuro `crm-miner-backup`.)*
 - **`festival`:** definir o tipo canônico (`app-festival`? `portal-festival`?) antes de renomear.
 - **Apps git sujo:** `app-command-center` `app-mineros` `app-financeiro` (commitar antes).
 - ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
