@@ -43,6 +43,23 @@ O `install-skills.sh` (idempotente) instala:
 
 > Ganhou uma skill nova numa máquina? Copie pra `skills/`, `git add -A && git commit && git push`, e na outra `git pull && ./install-skills.sh`. Os **connectors da conta** (Notion, Asana, Gmail, etc.) não entram aqui: sincronizam sozinhos pelo login `claude.ai`.
 
+## Organizar o ~/dev por tipo (convenção de nomes)
+
+```bash
+cd ~/dev/dev-setup && git pull && ./reorg-dev.sh
+```
+
+`reorg-dev.sh` (idempotente) descobre o nome canônico de cada repo em `~/dev` pelo próprio
+GitHub (segue o redirect do rename), move a pasta pra `~/dev/<tipo>/<nome>` (`sites/ decks/
+crms/ portais/ apps/ mcps/ bots/`) e atualiza o `git remote`. Não commita nada, preserva
+trabalho não salvo. A convenção completa (formato `tipo-cliente`, de-para, regras de URL e
+favicon) está em `docs/convencao-nomes.md`.
+
+**Setup completo de um Mac (ex: MacBook):**
+```bash
+cd ~/dev/dev-setup && git pull && ./install-skills.sh && ./reorg-dev.sh
+```
+
 ## Pendências manuais (humano faz)
 
 1. **Obsidian Sync**: abrir Obsidian, logar com `gustavo@minerbz.com.br`, ativar Sync, cofre remoto `miner`, pasta local `~/ObsidianVaults/miner` (FORA do iCloud).

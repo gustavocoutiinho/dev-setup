@@ -156,10 +156,17 @@ crms), sempre com a URL antiga viva.
 ### ✅ GitHub 100% PADRONIZADO — 29/29 repos ativos (11/07/2026)
 - `app-command-center` (era miner-command-center): renomeado + pasta `apps/` + produção 200. Resíduo `_empty-app-command-center` arquivado (criei por engano; deletar depois).
 
-### ⏸️ Só falta mover 2 pastas LOCAIS (repo GitHub já ok; código seu não commitado)
-- `~/dev/mineros` → `apps/app-mineros`: código não commitado (src/index.js, shopify.js, alertas.js + novos).
-- `~/dev/miner-financeiro` → `apps/app-financeiro`: `.gitignore` mudado + [[project_financeiro_miner]] alerta sessões paralelas.
-Quando você commitar, eu movo a pasta + atualizo o `git remote` (hoje aponta pro nome antigo, que redireciona).
+### ⚠️ Impasse nos FINANCEIROS — sua decisão (não mexo sozinho)
+Descoberto ao reorganizar: existem **dois repos Next.js distintos**, não é duplicata —
+`app-financeiro` (push jun/2026, usa **Drizzle**, tem `design/`) e **`miner-financeiro`**
+(ativo, push de hoje, tem `middleware.ts`/auth, `.claude/`, `data/`). O nome canônico
+`app-financeiro` já está **ocupado** pelo de junho, então **não renomeei o `miner-financeiro`
+ativo** (fica fora do padrão por enquanto). Some o `financeiro-miner` (projeto Vercel, v1).
+**Preciso que você diga:** qual é o principal (= fica `app-financeiro`), o que é o outro, e
+o que fazer com a v1. Até lá, os 3 ficam intocados. Ver [[project_financeiro_miner]].
+
+### ✅ Reorganização do `~/dev` (script `reorg-dev.sh`)
+`mineros`→`apps/app-mineros`, `normatel-premium`→`crms/crm-normatel`, `normatel-portal-unified`→`portais/portal-normatel`, `next-shadcn-admin-dashboard`→`portais/portal-miner-base`, `portal-accs`/`portal-content`→`portais/` (código sujo preservado no mv). Clone legado enganoso `~/dev/crm-miner`(=crmminer) tem 1 item sujo, deixei quieto.
 
 ### ✅ Feito (2ª rodada — repos, sem tocar Vercel; URLs custom intactas)
 - **`deck-accs`** (era accs-proposta) + pasta `decks/`. ⚠️ **Caso especial:** o deck ACCS ao vivo (`acomkt.minerbz.com.br`) é servido por um projeto Vercel SEPARADO `acomkt-deck` **com gate de "Acesso restrito"** — a pasta local (`accs-proposta`, que dá 404) NÃO é a fonte. Favicon Miner do deck-accs ao vivo pendente (não deployar a pasta por cima sem preservar o gate).
