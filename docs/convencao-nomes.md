@@ -189,6 +189,13 @@ Cliente com >1 projeto do mesmo tipo → acrescentei qualificador (rename revers
 
 Regra fixada: quando há >1 do mesmo `tipo+cliente`, acrescentar qualificador.
 
+### 🔵 Projetos Vercel: decisão consciente de NÃO renomear
+Os **repos GitHub** estão 100% padronizados (é o que resolve "achar"). Os **projetos Vercel**
+ficam com o nome antigo **de propósito**: quase todos servem por `.vercel.app`, e renomear o
+projeto mataria essa URL (a Vercel não deixa mantê-la) — fere a regra nº1. Os com domínio
+próprio têm ressalva (`minercrm`=OAuth Bling · `accs-proposta`=gate · `festival`=DNS). Só
+renomear projeto Vercel caso a caso, com você, quando a URL puder mudar ou virar domínio custom.
+
 ### ⏳ Resta (passe cuidadoso / fora do meu alcance seguro)
 - **Favicon em produção:** portais, apps, `crm-miner` (editar + deploy de produção ativa) e `deck-accs` (gate `acomkt-deck`).
 - `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel).
