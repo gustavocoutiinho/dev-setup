@@ -153,20 +153,22 @@ crms), sempre com a URL antiga viva.
 - **Arquivados** ("só guardar"): `crmminer` `antigrativity` `mig1` `miner-caminho-santiago`
   (archive no GitHub) + pastas movidas pra `~/dev/interno/arquivo/`
 
-### ⏸️ Pulado — git sujo (trabalho não commitado; commitar antes pra eu não atropelar)
-- `miner-command-center` → `app-command-center`
-- `mineros` → `app-mineros`
-- `miner-financeiro` → `app-financeiro`
+### ⏸️ A fechar quando você commitar o trabalho pendente (git sujo)
+- `app-mineros` (era mineros) e `app-financeiro` (era miner-financeiro): **repo já renomeado**; falta mover a pasta pra `apps/` e atualizar o `git remote` (aponta pro nome antigo, que redireciona).
+- `app-command-center` (miner-command-center): **sem repo GitHub** (não versionado) + pasta suja — versionar depois de commitar.
 
 ### ✅ Feito (2ª rodada — repos, sem tocar Vercel; URLs custom intactas)
 - **`deck-accs`** (era accs-proposta) + pasta `decks/`. ⚠️ **Caso especial:** o deck ACCS ao vivo (`acomkt.minerbz.com.br`) é servido por um projeto Vercel SEPARADO `acomkt-deck` **com gate de "Acesso restrito"** — a pasta local (`accs-proposta`, que dá 404) NÃO é a fonte. Favicon Miner do deck-accs ao vivo pendente (não deployar a pasta por cima sem preservar o gate).
 - **Portais/base:** `portal-mig` `portal-content` `portal-miner-base` (rename repo) · `portal-accs` (já canônico, + topics; portal.minerbz.com.br 200)
 - **`crm-normatel`** (era normatel-premium; rename repo — pasta local suja, mover quando limpa)
 
-### ⏳ Precisa de você / coordenação (não toquei)
-- **`minercrm` → `crm-miner`:** mantido junto com o **Thales** (renomear afeta o fluxo dele) E `minercrm.vercel.app` é usada no **OAuth do Bling da PRLS** (não renomear o projeto Vercel). Coordenar antes. *(Nome `crm-miner` já liberado: o repo legado homônimo virou `crm-miner-legado` e foi arquivado. `minercrm-private` = futuro `crm-miner-backup`.)*
-- **`festival`:** definir o tipo canônico (`app-festival`? `portal-festival`?) antes de renomear.
-- **Apps git sujo:** `app-command-center` `app-mineros` `app-financeiro` (commitar antes).
+### ✅ Feito (3ª rodada — "só faça")
+- **`crm-miner`** (era minercrm): rename **do repo** + pasta → `~/dev/crms/crm-miner`. Projeto Vercel **intocado** (OAuth Bling da PRLS vivo); produção `minercrm.vercel.app` 200. ⚠️ **avisar o Thales** do nome novo (o redirect cobre enquanto isso).
+- **`app-festival`** (era festival-costume-gourmet): repo + pasta → `~/dev/apps/app-festival`. Vercel intocada (DNS custom fora).
+
+### ⏳ Resta (passe cuidadoso / fora do meu alcance seguro)
+- **Favicon em produção:** portais, apps, `crm-miner` (editar + deploy de produção ativa) e `deck-accs` (gate `acomkt-deck`).
+- `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel).
 - ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
 
 ### 📋 Passes dedicados (à parte)
