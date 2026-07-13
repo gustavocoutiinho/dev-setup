@@ -189,6 +189,11 @@ Cliente com >1 projeto do mesmo tipo → acrescentei qualificador (rename revers
 
 Regra fixada: quando há >1 do mesmo `tipo+cliente`, acrescentar qualificador.
 
+### 🆕 Repos novos (criados por outra sessão — não renomeei pra não atropelar/quebrar Lovable)
+- `pdcminernormatel` ("Prestação de Contas Normatel + Miner", criado 13/07) → recomendo **`deck-normatel-pdc`**.
+- `maestria-plano-estrategico-b2b` (Lovable App, plano estratégico B2B, criado 11/07) → recomendo **`deck-maestria`** (novo cliente Maestria). Cuidado: renomear repo Lovable pode exigir reconectar a integração.
+Aplicar quando a sessão que os criou terminar, ou confirmar comigo pra eu fazer.
+
 ### 🔵 Projetos Vercel: decisão consciente de NÃO renomear
 Os **repos GitHub** estão 100% padronizados (é o que resolve "achar"). Os **projetos Vercel**
 ficam com o nome antigo **de propósito**: quase todos servem por `.vercel.app`, e renomear o
