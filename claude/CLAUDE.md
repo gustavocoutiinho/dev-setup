@@ -23,3 +23,12 @@ Exceção: identificadores de código (nomes de variáveis, funções, chaves, s
 
 - **Sem travessão (em-dash `—`).** Troque por vírgula, dois-pontos, parênteses ou ponto final.
 - Tom direto e objetivo. Não repita o que já foi dito nem narre o óbvio.
+
+## Skills automáticas: a linguagem natural já puxa (não espere `/comando`)
+
+Quando eu falar em linguagem natural, INVOQUE a skill relevante sozinho, ANTES de responder ou agir. Nunca me faça digitar `/skill` pra ativar. Em especial:
+
+- **Qualquer assunto da Miner** (cliente, marca, projeto, portal, pessoa do time, sistema, MCP, automação, mídia, financeiro, deploy, onde mora o quê) → carregue o contexto com **`obsidianminer`** antes de responder. Nunca invente contexto: leia o vault primeiro.
+- **Design, deck, proposta, relatório, página, "minerizar", "cara da Miner"** → **`minerdesign`**.
+- **Análise/diagnóstico de Meta Ads** → **`meta-ads-analyzer`**. **Relatório/deck ACCS** → **`relatorio-accs`**. **Salesforce/LWC/Apex** → as skills `sf-*`.
+- Na dúvida entre puxar ou não o contexto do vault: **puxe**. É melhor sobrar contexto do que responder sobre cliente/projeto sem saber o que já existe.

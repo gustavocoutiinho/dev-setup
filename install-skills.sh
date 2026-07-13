@@ -51,6 +51,20 @@ else
   echo "!! jq não encontrado: adicione \"language\": \"português brasileiro\" manualmente em $SETTINGS"
 fi
 
+# 3) settings.json: permissão de ler/escrever no vault Obsidian (idempotente, "sempre atualizar o Obsidian")
+VAULT="$HOME/ObsidianVaults/miner"
+if command -v jq >/dev/null 2>&1 && [ -f "$SETTINGS" ]; then
+  tmp="$(mktemp)"
+  if jq --arg v "$VAULT" '
+      .permissions.allow = (((.permissions.allow // []) + ["Read(\($v)/**)","Edit(\($v)/**)","Write(\($v)/**)"]) | unique)
+      | .permissions.additionalDirectories = (((.permissions.additionalDirectories // []) + [$v]) | unique)
+    ' "$SETTINGS" > "$tmp" 2>/dev/null; then
+    mv "$tmp" "$SETTINGS"; echo "==> settings.json: permissão de escrita no vault Obsidian"
+  else
+    rm -f "$tmp"; echo "!! não consegui setar permissão do vault (settings.json)"
+  fi
+fi
+
 # --- Plugins de marketplace do Claude Code (merge idempotente no settings.json) ---
 MANIFEST="$DIR/plugins.json"
 if [ -f "$MANIFEST" ] && command -v python3 >/dev/null 2>&1; then
