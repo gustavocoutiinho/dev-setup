@@ -12,7 +12,7 @@ Objetivo: manter o vault (o cérebro do Gustavo) refletindo o estado atual das f
 1. **Carteira**: leia os clientes ativos em `clientes-ativos-jul2026.md` (fonte oficial). Só cruze quem está ativo.
 2. **Puxe das ferramentas conectadas** (use só as que responderem; PULE as que pedirem login e registre como "sem auth"):
    - **Asana** (`mcp productivity:asana`): tarefas/projetos abertos por cliente, responsável, prazo, status.
-   - **Meta Ads** (`mcp meta-ads`): gasto, leads, CPA, ROAS por conta, últimos 7 dias.
+   - **Meta Ads** (`mcp meta-ads`): gasto, leads, CPA, ROAS, últimos 7 dias. **Use a conta que VEICULA**, não a "Read-Only" (essas retornam 0). Consulte `reference_contas_meta_ativas` pro mapa cliente→conta. Se só houver Read-Only/0, escreva "mídia: conta não compartilhada com o token", nunca reporte R$ 0 como pausa real. `date_preset` "last_week" não existe no Meta: use `time_range` {since, until}.
    - **WhatsApp** (`mcp whatsapp`): últimas interações dos grupos "Ⓜ️ [cliente] + Miner" (decisões, pendências). É LOCAL, só roda no Mac mini.
    - Qualquer outra ferramenta com MCP conectado (Notion, Gmail, Calendar, Supabase…).
 3. **Cruze por cliente**: para cada cliente ativo, atualize a nota dele no vault com um bloco datado:
