@@ -199,6 +199,7 @@ renomear projeto Vercel caso a caso, com você, quando a URL puder mudar ou vira
 ### ⏳ Resta (passe cuidadoso / fora do meu alcance seguro)
 - **Favicon em produção:** portais, apps, `crm-miner` (editar + deploy de produção ativa) e `deck-accs` (gate `acomkt-deck`).
 - `portal-mslz` (loader, sem repo tradicional) · `ollis` (só Vercel).
+- **Pastas de deploy sem git na raiz** (não são repos, source de produção sensível — não toquei): `~/dev/prls-os-site` (source do portal PRLS, `_src/compile.py`) · `~/dev/miner-financeiro-cloud` (variação Next.js do financeiro) · `~/dev/crm-miner` (clone legado do crmminer, sujo).
 - **Deletar no GitHub** (arquivados, resíduos meus — falta `delete_repo` scope): `claude-setup` · `_empty-app-command-center`. Comando: `gh auth refresh -h github.com -s delete_repo && gh repo delete gustavocoutiinho/<nome> --yes`.
 - ⚠️ `crm.prls.com.br` e `festival.minerbz.com.br` respondem 000 (DNS do domínio custom, **preexistente**; apps vivos pelo `.vercel.app`).
 
