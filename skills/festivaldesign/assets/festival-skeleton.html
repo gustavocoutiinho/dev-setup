@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--
+  festivaldesign · esqueleto de peças do Festival Costume Gourmet
+  Tokens a preencher via pipeline (references/recipes.md):
+    Fontes: %%F_SERIF%% (Playfair) %%F_SERIF_IT%% (Playfair Italic) %%F_SANS%% (Montserrat)
+    Assets: %%LOGO_FCG%% %%LOGO_SL%% %%SELO%% %%CARIMBO%% %%ONDAS%% %%ILUSTRA_MESA%% %%IC_*%%
+    Fotos:  %%IMG_*%% (duotone na cor do mundo — ver recipes.md)
+  Conteúdo abaixo é DEMONSTRAÇÃO dos componentes: troque pelo conteúdo real sem alterá-lo.
+  Cada .peca é uma arte fechada (feed 4:5 padrão). Exporte uma a uma (PNG) — recipes.md §6.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festival Costume Gourmet · peças</title>
+<style>
+@font-face{font-family:'Playfair';src:url(data:font/ttf;base64,%%F_SERIF%%) format('truetype');font-weight:400 900;font-style:normal;}
+@font-face{font-family:'Playfair';src:url(data:font/ttf;base64,%%F_SERIF_IT%%) format('truetype');font-weight:400 900;font-style:italic;}
+@font-face{font-family:'Montserrat';src:url(data:font/ttf;base64,%%F_SANS%%) format('truetype');font-weight:400 800;}
+
+:root{
+  --vinho:#3A0F0E; --vinho-glow:#4E1714;
+  --oliva:#26260A; --oliva-glow:#474720;
+  --creme:#FCF6EE; --creme-soft:#EADFCF;
+  --dourado:#D8992F; --dourado-lt:#E2A94C;
+  --laranja:#D2742E; --telha:#DC463C; --coral:#C25D50; --musgo:#A0A04E;
+  --marrom:#6E3C16; --bordo:#5A1414; --nude:#D3A281; --marinho:#3F3275;
+  --grafite:#4A4744; --linha:#CB8F3C;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#1c1512;display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px;-webkit-font-smoothing:antialiased;}
+
+/* ===== peça base + formatos ===== */
+.peca{position:relative;width:1080px;overflow:hidden;display:flex;flex-direction:column;
+  font-family:'Montserrat',sans-serif;padding:96px 92px;isolation:isolate;}
+.fmt-45{height:1350px;} .fmt-916{height:1920px;} .fmt-11{height:1080px;}
+.vinho{background:radial-gradient(125% 85% at 50% 20%,var(--vinho-glow),var(--vinho) 60%);color:var(--creme);}
+.oliva{background:radial-gradient(125% 85% at 50% 20%,var(--oliva-glow),var(--oliva) 60%);color:var(--creme);}
+.creme{background:var(--creme);color:var(--grafite);}
+
+/* ===== textura de fundo (ilustração tom-sobre-tom) ===== */
+.textura{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.09;z-index:0;pointer-events:none;}
+.textura.low{opacity:.06;}
+.peca>*{position:relative;z-index:1;}
+
+/* ===== moldura vintage (linha dupla chanfrada) + sparkle ===== */
+.moldura{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.sparkle{position:absolute;top:52px;right:60px;width:46px;height:46px;z-index:3;}
+.creme .moldura .ln{stroke:url(#gline);} /* mantém gradiente sobre creme também */
+
+/* ===== título empilhado (alterna fonte + cor) ===== */
+.stack{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:.98;gap:.06em;}
+.stack.left{align-items:flex-start;text-align:left;}
+.l-caps{font-family:'Montserrat';font-weight:800;text-transform:uppercase;letter-spacing:.2em;}
+.l-serif{font-family:'Playfair';font-weight:800;letter-spacing:-.005em;}
+.l-serif-it{font-family:'Playfair';font-weight:700;font-style:italic;letter-spacing:.01em;}
+/* escalas (peça 1080) */
+.xl{font-size:150px;}    /* palavra-âncora serif */
+.lg{font-size:96px;}
+.md{font-size:60px;}
+.rot{font-size:34px;}    /* rótulo caps */
+.rot-sm{font-size:26px;letter-spacing:.28em;}
+.c-dourado{color:var(--dourado);} .c-laranja{color:var(--laranja);} .c-telha{color:var(--telha);}
+.c-coral{color:var(--coral);} .c-musgo{color:var(--musgo);} .c-creme{color:var(--creme);}
+.c-grafite{color:var(--grafite);} .c-marrom{color:var(--marrom);} .c-bordo{color:var(--bordo);}
+
+/* ===== co-branding (logo FCG + São Luiz + selo) ===== */
+.brand-top{display:flex;justify-content:center;}
+.brand-top img{height:118px;}
+.cobrand{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:44px;padding-top:40px;}
+.cobrand img.logo-sl{height:74px;}
+.cobrand img.logo-fcg{height:92px;}
+.cobrand img.selo{height:104px;}
+.wht{filter:brightness(0) invert(1);} /* logo mono branco sobre escuro, se precisar */
+
+/* ===== card de foto (duotone) com moldura interna ===== */
+.card-foto{position:absolute;inset:150px 92px 250px;border-radius:26px;overflow:hidden;z-index:1;
+  background-size:cover;background-position:center;}
+.card-foto::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(30,8,8,.55) 100%);}
+
+/* ===== card de atração / chef ===== */
+.retrato{align-self:center;width:520px;height:600px;border-radius:24px;overflow:hidden;
+  border:3px solid var(--dourado);background-size:cover;background-position:center top;}
+
+/* ===== chip de ícone de gravura ===== */
+.icones{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;}
+.chip-ic{width:150px;height:150px;}
+.chip-ic img{width:100%;height:100%;object-fit:contain;}
+.selo-ic{align-self:center;width:132px;height:132px;}
+.selo-ic img{width:100%;height:100%;object-fit:contain;}
+
+/* carimbo decorativo grande, semi-transparente, num canto */
+.carimbo{position:absolute;width:440px;opacity:.16;z-index:0;left:-90px;bottom:120px;}
+
+.gap{flex:1;} /* empurra co-branding pro rodapé */
+
+@media print{
+  @page{size:1080px 1350px;margin:0;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  body{background:none;gap:0;padding:0;}
+  .peca{page-break-after:always;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SVG defs: gradiente da moldura + moldura + sparkle (reutilizáveis) ============ -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <linearGradient id="gline" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#E2A94C"/><stop offset=".5" stop-color="#D2742E"/><stop offset="1" stop-color="#DC463C"/>
+  </linearGradient>
+</defs></svg>
+
+<!-- Moldura (copie o bloco <svg class="moldura">…</svg> + <svg class="sparkle">…</svg> em cada peça) -->
+
+<!-- ==================== PEÇA 1 · CAPA (vinho) ==================== -->
+<section class="peca fmt-45 vinho">
+  <div class="textura" style="background-image:url(data:image/png;base64,%%ILUSTRA_MESA%%)"></div>
+  <svg class="moldura" viewBox="0 0 400 500" preserveAspectRatio="none">
+    <path class="ln" d="M32,13 L368,13 L387,32 L387,468 L368,487 L32,487 L13,468 L13,32 Z"
+      fill="none" stroke="url(#gline)" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+    <path class="ln" d="M41,23 L359,23 L377,41 L377,459 L359,477 L41,477 L23,459 L23,41 Z"
+      fill="none" stroke="url(#gline)" stroke-width="1" vector-effect="non-scaling-stroke" opacity=".7"/>
+  </svg>
+  <svg class="sparkle" viewBox="0 0 48 48"><path d="M24,0 C26,17 31,22 48,24 C31,26 26,31 24,48 C22,31 17,26 0,24 C17,22 22,17 24,0 Z" fill="var(--dourado)"/></svg>
+
+  <div class="brand-top"><img class="logo-fcg" src="data:image/png;base64,%%LOGO_FCG%%" alt="Festival Costume Gourmet" style="height:150px"></div>
+  <div class="gap"></div>
+  <div class="stack">
+    <div class="l-caps rot c-creme">Sabores</div>
+    <div class="l-caps md c-coral" style="letter-spacing:.16em">de uma bela</div>
+    <div class="l-serif xl c-dourado" style="font-size:190px">história</div>
+  </div>
+  <div class="cobrand">
+    <img class="logo-sl" src="data:image/png;base64,%%LOGO_SL%%" alt="São Luiz Supermercado">
+    <img class="selo" src="data:image/png;base64,%%SELO%%" alt="100 anos São Luiz">
+  </div>
+</section>
+
+<!-- ==================== PEÇA 2 · SAVE THE DATE (vinho) ==================== -->
+<section class="peca fmt-45 vinho">
+  <div class="textura low" style="background-image:url(data:image/png;base64,%%ILUSTRA_MESA%%)"></div>
+  <svg class="moldura" viewBox="0 0 400 500" preserveAspectRatio="none">
+    <path class="ln" d="M32,13 L368,13 L387,32 L387,468 L368,487 L32,487 L13,468 L13,32 Z" fill="none" stroke="url(#gline)" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <svg class="sparkle" viewBox="0 0 48 48"><path d="M24,0 C26,17 31,22 48,24 C31,26 26,31 24,48 C22,31 17,26 0,24 C17,22 22,17 24,0 Z" fill="var(--dourado)"/></svg>
+  <img src="data:image/png;base64,%%ONDAS%%" style="position:absolute;top:150px;right:70px;width:230px;opacity:.85" alt="">
+
+  <div class="stack" style="margin-top:20px">
+    <div class="l-serif-it lg c-dourado" style="font-size:118px">save the date</div>
+  </div>
+  <div class="brand-top" style="margin-top:34px"><img class="logo-fcg" src="data:image/png;base64,%%LOGO_FCG%%" alt="" style="height:96px"></div>
+  <div class="gap"></div>
+  <div class="stack">
+    <div class="l-serif c-dourado" style="font-size:118px">Quando</div>
+    <div class="l-caps c-creme" style="font-size:60px;letter-spacing:.06em;margin-top:14px">18, 19 e 20</div>
+    <div class="l-caps rot c-laranja" style="margin-top:6px">de setembro</div>
+    <div class="l-caps rot-sm c-dourado" style="margin-top:14px">das 15 às 22h</div>
+  </div>
+  <div class="stack" style="margin-top:52px">
+    <div class="l-serif c-dourado" style="font-size:118px">Onde</div>
+    <div class="l-caps c-creme" style="font-size:44px;letter-spacing:.06em;margin-top:14px">La Maison Coliseu</div>
+    <div class="l-caps rot-sm c-laranja" style="margin-top:8px">Av. Eng. Luiz Vieira, 555</div>
+  </div>
+  <div class="gap"></div>
+</section>
+
+<!-- ==================== PEÇA 3 · FRASE (creme) ==================== -->
+<section class="peca fmt-45 creme">
+  <svg class="moldura" viewBox="0 0 400 500" preserveAspectRatio="none">
+    <path class="ln" d="M32,13 L368,13 L387,32 L387,468 L368,487 L32,487 L13,468 L13,32 Z" fill="none" stroke="url(#gline)" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+    <path class="ln" d="M41,23 L359,23 L377,41 L377,459 L359,477 L41,477 L23,459 L23,41 Z" fill="none" stroke="url(#gline)" stroke-width="1" vector-effect="non-scaling-stroke" opacity=".7"/>
+  </svg>
+  <svg class="sparkle" viewBox="0 0 48 48"><path d="M24,0 C26,17 31,22 48,24 C31,26 26,31 24,48 C22,31 17,26 0,24 C17,22 22,17 24,0 Z" fill="var(--dourado)"/></svg>
+
+  <div class="gap"></div>
+  <div class="selo-ic" style="width:150px;height:150px;margin-bottom:20px"><img src="data:image/png;base64,%%IC_LIVRO%%" alt=""></div>
+  <div class="stack">
+    <div class="l-serif md c-grafite" style="font-size:64px">Há</div>
+    <div class="l-serif xl c-telha" style="font-size:140px">histórias</div>
+    <div class="l-caps rot c-grafite" style="margin-top:8px">que não se contam</div>
+    <div class="l-caps rot c-dourado" style="margin-top:4px">apenas com</div>
+    <div class="l-serif xl c-dourado" style="font-size:140px">palavras</div>
+  </div>
+  <div class="gap"></div>
+</section>
+
+<!-- ==================== PEÇA 4 · CARD DE FOTO (oliva) ==================== -->
+<section class="peca fmt-45 oliva">
+  <div class="card-foto" style="background-image:url(data:image/jpeg;base64,%%IMG_CHEFS%%)"></div>
+  <svg class="moldura" viewBox="0 0 400 500" preserveAspectRatio="none">
+    <path class="ln" d="M32,13 L368,13 L387,32 L387,468 L368,487 L32,487 L13,468 L13,32 Z" fill="none" stroke="url(#gline)" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <svg class="sparkle" viewBox="0 0 48 48"><path d="M24,0 C26,17 31,22 48,24 C31,26 26,31 24,48 C22,31 17,26 0,24 C17,22 22,17 24,0 Z" fill="var(--dourado)"/></svg>
+
+  <div class="gap"></div>
+  <div class="stack" style="margin-bottom:26px">
+    <div class="l-serif c-dourado" style="font-size:150px">Chefs</div>
+    <div class="l-caps c-creme" style="font-size:58px;letter-spacing:.2em">renomados</div>
+  </div>
+  <div class="cobrand">
+    <img class="logo-fcg" src="data:image/png;base64,%%LOGO_FCG%%" alt="">
+    <img class="logo-sl" src="data:image/png;base64,%%LOGO_SL%%" alt="">
+    <img class="selo" src="data:image/png;base64,%%SELO%%" alt="">
+  </div>
+</section>
+
+<!-- ==================== PEÇA 5 · ATRAÇÃO CONFIRMADA (vinho) ==================== -->
+<section class="peca fmt-45 vinho">
+  <svg class="moldura" viewBox="0 0 400 500" preserveAspectRatio="none">
+    <path class="ln" d="M32,13 L368,13 L387,32 L387,468 L368,487 L32,487 L13,468 L13,32 Z" fill="none" stroke="url(#gline)" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <svg class="sparkle" viewBox="0 0 48 48"><path d="M24,0 C26,17 31,22 48,24 C31,26 26,31 24,48 C22,31 17,26 0,24 C17,22 22,17 24,0 Z" fill="var(--dourado)"/></svg>
+
+  <div class="l-caps rot-sm c-creme" style="text-align:center;letter-spacing:.34em">Atração confirmada</div>
+  <div class="retrato" style="margin-top:44px;background-image:url(data:image/jpeg;base64,%%IMG_CHEF%%)"></div>
+  <div class="stack" style="margin-top:40px">
+    <div class="l-serif c-dourado" style="font-size:150px">Dayse</div>
+    <div class="l-caps c-creme" style="font-size:58px;letter-spacing:.16em">Paparoto</div>
+  </div>
+  <div class="cobrand">
+    <img class="logo-fcg" src="data:image/png;base64,%%LOGO_FCG%%" alt="">
+    <img class="logo-sl" src="data:image/png;base64,%%LOGO_SL%%" alt="">
+    <img class="selo" src="data:image/png;base64,%%SELO%%" alt="">
+  </div>
+</section>
+
+<!-- ==================== PEÇA 6 · ÍCONES DE GRAVURA (referência) ==================== -->
+<section class="peca fmt-11 creme">
+  <svg class="moldura" viewBox="0 0 400 400" preserveAspectRatio="none">
+    <path class="ln" d="M32,13 L368,13 L387,32 L387,368 L368,387 L32,387 L13,368 L13,32 Z" fill="none" stroke="url(#gline)" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <svg class="sparkle" viewBox="0 0 48 48"><path d="M24,0 C26,17 31,22 48,24 C31,26 26,31 24,48 C22,31 17,26 0,24 C17,22 22,17 24,0 Z" fill="var(--dourado)"/></svg>
+  <div class="gap"></div>
+  <div class="icones">
+    <div class="chip-ic"><img src="data:image/png;base64,%%IC_VINHO%%" alt="vinho"></div>
+    <div class="chip-ic"><img src="data:image/png;base64,%%IC_QUEIJO%%" alt="queijo"></div>
+    <div class="chip-ic"><img src="data:image/png;base64,%%IC_CAFE%%" alt="café"></div>
+    <div class="chip-ic"><img src="data:image/png;base64,%%IC_COGUMELO%%" alt="cogumelo"></div>
+    <div class="chip-ic"><img src="data:image/png;base64,%%IC_RAMO%%" alt="ramo"></div>
+    <div class="chip-ic"><img src="data:image/png;base64,%%IC_PAO%%" alt="pão"></div>
+  </div>
+  <div class="stack" style="margin-top:44px"><div class="l-serif-it md c-marrom">os sabores da história</div></div>
+  <div class="gap"></div>
+</section>
+
+</body>
+</html>
