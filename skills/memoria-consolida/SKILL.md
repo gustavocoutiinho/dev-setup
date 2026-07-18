@@ -14,7 +14,7 @@ A memória do Gustavo vive em `~/ObsidianVaults/miner/memory/` (uma nota por fat
 ## Como executar
 1. **Leia o índice** `memory/MEMORY.md` e cruze com os arquivos reais em `memory/` (via [[obsidianminer]]).
 2. **Ache duplicata/sobreposição:** dois arquivos sobre o mesmo cliente/tema, ou fato repetido.
-3. **Funde no arquivo canônico** (o mais completo), preservando `**Why:**` e `**How to apply:**` de feedback/project. Linka relacionados com `[[nome]]`.
+3. **Funde no arquivo canônico** (o mais completo), preservando `**Why:**` e `**How to apply:**` de feedback/project. Linka relacionados com wikilink (`[[slug-da-nota]]`).
 4. **Delete o duplicado** e ajuste o `MEMORY.md` (uma linha, com o gancho certo).
 5. **Frontmatter correto:** `type: user|feedback|project|reference`. Datas relativas viram absolutas.
 6. **Não invente:** se dois fatos conflitam, marque a divergência, não escolha por conta própria.
