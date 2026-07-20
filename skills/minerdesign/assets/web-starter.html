@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--
+  minerdesign · web-starter · vitrine dos componentes de UI web/app/portal da Miner
+  Espelha os tokens de DESIGN.md. Para deck/slide use assets/slides-skeleton.html.
+
+  FONTES (Visby CF + Behind The Nineties, proprietarias, no KV):
+   1. Protótipo local: os @font-face abaixo tentam local() (fonte instalada no sistema) e caem pro fallback.
+   2. Material oficial / publicado: embuta os .woff2/.otf do KV (ver references/recipes.md, mesmo pipeline do slides-skeleton)
+      ou sirva os arquivos e aponte o src: url(). Troque o fallback pela fonte real ANTES de publicar.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miner · Web Starter</title>
+<style>
+@font-face{font-family:'Visby CF';src:local('Visby CF'),local('VisbyCF-Regular');font-weight:400;font-display:swap;}
+@font-face{font-family:'Visby CF';src:local('Visby CF DemiBold'),local('VisbyCF-DemiBold');font-weight:600;font-display:swap;}
+@font-face{font-family:'Visby CF';src:local('Visby CF ExtraBold'),local('VisbyCF-ExtraBold');font-weight:800;font-display:swap;}
+@font-face{font-family:'Nineties';src:local('Behind The Nineties'),local('Behind-The-Nineties-Bd');font-weight:700;font-display:swap;}
+
+:root{
+  /* cores (espelho de DESIGN.md) */
+  --background:#0A0A0B; --surface:#141417; --surface-2:#1B1B1F; --border:#2A2A2F;
+  --primary:#4562FF; --primary-soft:rgba(69,98,255,.14); --on-primary:#fff;
+  --text:#F4F4F2; --body:#C6C6C4; --muted:#87878A;
+  --soho:#CBCBCB; --brooklyn:#AEAEAE; --success:#7FD49A; --danger:#E5484D;
+  /* escala */
+  --xs:4px; --sm:8px; --md:12px; --lg:16px; --xl:24px; --2xl:32px; --3xl:48px;
+  --r-sm:10px; --r-md:12px; --r-lg:16px; --r-xl:18px; --r-pill:999px;
+  --shadow-overlay:0 12px 40px rgba(0,0,0,.55);
+  --sans:'Visby CF','Geist','Inter',system-ui,sans-serif;
+  --serif:'Nineties','Playfair Display',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--background);color:var(--body);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.55;}
+.serif{font-family:var(--serif);font-weight:700;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 var(--xl) 96px;}
+
+/* ===== topbar / nav ===== */
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:var(--xl);padding:16px var(--xl);
+  background:rgba(10,10,11,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.topbar .brand{font-family:var(--serif);font-size:20px;color:var(--text);}
+.topbar .brand em{font-style:normal;font-family:var(--sans);font-weight:400;font-size:15px;}
+.topbar .brand .mk{color:var(--primary);}
+.topbar nav{display:flex;gap:var(--xl);margin-left:var(--lg);}
+.topbar nav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;}
+.topbar nav a.on,.topbar nav a:hover{color:var(--text);}
+.topbar .sp{margin-left:auto;}
+
+/* ===== tipografia (escala) ===== */
+.hgroup{margin:56px 0 var(--lg);}
+.hgroup .k{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);}
+.hgroup h2{font-family:var(--sans);font-weight:800;font-size:26px;color:var(--text);text-transform:uppercase;letter-spacing:.6px;margin-top:6px;}
+.type-row{display:flex;align-items:baseline;gap:var(--lg);padding:12px 0;border-bottom:1px solid var(--border);}
+.type-row .tag{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);width:96px;flex:none;}
+.d-display{font-family:var(--serif);font-size:56px;color:var(--text);line-height:1;}
+.d-h1{font-weight:800;font-size:40px;color:var(--text);letter-spacing:.2px;}
+.d-h2{font-weight:800;font-size:28px;color:var(--text);text-transform:uppercase;letter-spacing:.6px;}
+.d-body{font-size:16px;color:var(--body);}
+.d-caption{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+
+/* ===== botoes ===== */
+.row{display:flex;gap:var(--md);flex-wrap:wrap;align-items:center;}
+.btn{font-family:var(--sans);font-size:14px;font-weight:800;border-radius:var(--r-md);padding:12px 20px;border:1px solid transparent;cursor:pointer;transition:.15s;letter-spacing:.2px;}
+.btn-primary{background:var(--primary);color:var(--on-primary);}
+.btn-primary:hover{filter:brightness(1.1);}
+.btn-secondary{background:transparent;color:var(--text);border-color:var(--border);font-weight:600;}
+.btn-secondary:hover{border-color:var(--primary);color:#fff;}
+.btn-ghost{background:transparent;color:var(--primary);font-weight:600;border-color:transparent;}
+.btn-ghost:hover{background:var(--primary-soft);}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ===== forms ===== */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:var(--lg);max-width:360px;}
+.field label{font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+.input{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-family:var(--sans);font-size:14px;outline:none;transition:.15s;}
+.input::placeholder{color:var(--muted);}
+.input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft);}
+.input.err{border-color:var(--danger);}
+.field .msg-err{font-size:11.5px;color:var(--danger);font-weight:600;}
+select.input{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 18px,calc(100% - 12px) 18px;background-size:6px 6px;background-repeat:no-repeat;}
+
+/* ===== cards ===== */
+.grid{display:grid;gap:var(--lg);}
+.g-3{grid-template-columns:repeat(3,1fr);}
+.g-4{grid-template-columns:repeat(4,1fr);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:var(--xl);}
+.card h3{font-weight:800;font-size:18px;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.card p{font-size:14px;color:var(--body);}
+.card .ch{display:flex;align-items:center;gap:var(--md);margin-bottom:var(--md);}
+.ico-chip{width:44px;height:44px;background:var(--soho);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex:none;color:var(--primary);font-weight:800;}
+
+/* stat card */
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 22px;position:relative;overflow:hidden;}
+.stat::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);}
+.stat .v{font-family:var(--serif);font-size:46px;color:var(--text);line-height:1;}
+.stat .v small{font-size:22px;color:var(--primary);}
+.stat .l{font-size:11.5px;color:var(--body);margin-top:8px;line-height:1.4;}
+.stat .l b{color:var(--text);}
+
+/* ===== badges ===== */
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;padding:5px 11px;border-radius:var(--r-pill);border:1px solid var(--border);color:var(--muted);}
+.badge.blue{border-color:var(--primary);color:#fff;background:var(--primary-soft);}
+.badge.free{border-color:rgba(127,212,154,.5);color:var(--success);}
+
+/* ===== bullets ===== */
+.bul{list-style:none;}
+.bul li{padding:6px 0 6px 20px;position:relative;font-size:14px;line-height:1.5;}
+.bul li::before{content:'→';position:absolute;left:0;top:6px;color:var(--primary);font-weight:800;font-size:12px;}
+.bul li b{color:var(--text);font-weight:600;}
+
+/* ===== tabela ===== */
+.tbl{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+th{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:800;text-align:left;padding:12px 16px;background:var(--surface-2);}
+td{padding:12px 16px;border-top:1px solid var(--border);font-size:13px;background:var(--surface);}
+td.nome{color:var(--text);font-weight:600;}
+td.free{color:var(--success);font-weight:800;font-size:11px;letter-spacing:1px;}
+.mark{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;}
+.mark.on{background:var(--primary);} .mark.off{border:2px solid var(--muted);}
+
+/* ===== faixa CTA / preco ===== */
+.cta{background:var(--primary);border-radius:var(--r-md);padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:var(--lg);flex-wrap:wrap;}
+.cta .t{color:#fff;font-weight:800;font-size:16px;}
+.cta .s{color:#D9E0FF;font-size:11px;text-transform:uppercase;letter-spacing:.8px;font-weight:600;}
+.cta .btn-onblue{background:#fff;color:var(--primary);}
+
+/* ===== toast erro ===== */
+.toast{display:flex;gap:var(--md);align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--danger);border-radius:var(--r-md);padding:14px 16px;max-width:420px;box-shadow:var(--shadow-overlay);}
+.toast .dot{width:8px;height:8px;border-radius:50%;background:var(--danger);margin-top:6px;flex:none;}
+.toast .tt{color:var(--text);font-weight:700;font-size:13.5px;}
+.toast .tb{color:var(--muted);font-size:12px;margin-top:2px;}
+
+footer{margin-top:72px;padding-top:var(--xl);border-top:1px solid var(--border);text-align:center;}
+footer .dv{font-family:var(--serif);font-size:30px;color:var(--text);}
+footer .dv .p{color:var(--primary);}
+footer .tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:800;margin-top:6px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand serif">Miner <em>Company</em> <span class="mk">▲</span></div>
+  <nav><a class="on">Dashboard</a><a>Funil</a><a>Clientes</a><a>Relatórios</a></nav>
+  <div class="sp"></div>
+  <button class="btn btn-secondary">Entrar</button>
+  <button class="btn btn-primary">Novo lead</button>
+</header>
+
+<div class="wrap">
+
+  <!-- TIPOGRAFIA -->
+  <div class="hgroup"><div class="k">Fundamento</div><h2>Tipografia</h2></div>
+  <div class="type-row"><span class="tag">display</span><span class="d-display">1.248</span></div>
+  <div class="type-row"><span class="tag">h1</span><span class="d-h1">Dados que viram venda</span></div>
+  <div class="type-row"><span class="tag">h2</span><span class="d-h2">Visão geral do funil</span></div>
+  <div class="type-row"><span class="tag">body</span><span class="d-body">Corpo de texto em Visby CF Regular, para leitura confortável em telas densas de produto.</span></div>
+  <div class="type-row"><span class="tag">caption</span><span class="d-caption">Fonte: MinerCRM · jul/2026</span></div>
+
+  <!-- BOTOES -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Botões</h2></div>
+  <div class="row">
+    <button class="btn btn-primary">Ação primária</button>
+    <button class="btn btn-secondary">Secundária</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-primary" disabled>Desabilitada</button>
+  </div>
+
+  <!-- FORMS -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Formulários</h2></div>
+  <div class="row" style="align-items:flex-start;gap:var(--2xl);">
+    <div>
+      <div class="field"><label>Nome do lead</label><input class="input" placeholder="Ex.: Aço Cearense"></div>
+      <div class="field"><label>Origem</label><select class="input"><option>Meta Ads</option><option>Indicação</option><option>Inbound</option></select></div>
+    </div>
+    <div>
+      <div class="field"><label>E-mail (foco)</label><input class="input" value="contato@empresa.com.br" autofocus></div>
+      <div class="field"><label>Telefone</label><input class="input err" value="(00) 0000"><span class="msg-err">Número incompleto.</span></div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Indicadores</h2></div>
+  <div class="grid g-4">
+    <div class="stat"><div class="v">98<small>→</small>590</div><div class="l"><b>Leads no mês</b>, crescimento de 6x</div></div>
+    <div class="stat"><div class="v">4,2<small>x</small></div><div class="l"><b>ROAS</b> médio da carteira</div></div>
+    <div class="stat"><div class="v">R$ 1,2<small>M</small></div><div class="l"><b>Pipeline</b> gerado</div></div>
+    <div class="stat"><div class="v">21</div><div class="l"><b>Clientes</b> ativos</div></div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Cards</h2></div>
+  <div class="grid g-3">
+    <div class="card">
+      <div class="ch"><div class="ico-chip">◆</div><h3>Automação</h3></div>
+      <p>CRM e IA conversando: cada lead entra, é qualificado e roteado sem toque manual.</p>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ico-chip">◆</div><h3>Dados</h3><span class="badge free" style="margin-left:auto;">Incluso</span></div>
+      <p>Painel único cruzando mídia paga, funil e faturamento. Verde é sempre "incluso".</p>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ico-chip">◆</div><h3>Vendas</h3></div>
+      <ul class="bul"><li><b>Régua de foco</b> por vendedor</li><li>Aniversários e RFM</li><li>Alertas de atraso</li></ul>
+    </div>
+  </div>
+
+  <!-- BADGES -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Badges</h2></div>
+  <div class="row">
+    <span class="badge">Neutro</span>
+    <span class="badge blue">Ativo</span>
+    <span class="badge free">Sem custo</span>
+  </div>
+
+  <!-- TABELA -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Tabela</h2></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Cliente</th><th>Segmento</th><th>ROAS</th><th>CRM</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="nome">Aço Cearense</td><td>Indústria B2B</td><td>5,1x</td><td><span class="mark on"></span></td><td class="free">Ativo</td></tr>
+        <tr><td class="nome">ForYou Essential</td><td>Joias</td><td>3,8x</td><td><span class="mark on"></span></td><td class="free">Ativo</td></tr>
+        <tr><td class="nome">Normatel</td><td>Varejo</td><td>4,4x</td><td><span class="mark off"></span></td><td class="free">Ativo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CTA -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Faixa de ação</h2></div>
+  <div class="cta">
+    <div><div class="t">Plano Dados + Vendas</div><div class="s">Implementação em 30 dias</div></div>
+    <button class="btn btn-onblue">It's ready?</button>
+  </div>
+
+  <!-- TOAST -->
+  <div class="hgroup"><div class="k">Componente</div><h2>Feedback de erro</h2></div>
+  <div class="toast"><div class="dot"></div><div><div class="tt">Falha ao sincronizar</div><div class="tb">Vermelho é funcional: só erro, nunca decoração.</div></div></div>
+
+  <footer>
+    <div class="dv serif">(Dados <span class="p">+</span> Vendas)</div>
+    <div class="tag">It's all in data</div>
+  </footer>
+</div>
+
+</body>
+</html>
