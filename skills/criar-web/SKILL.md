@@ -1,6 +1,6 @@
 ---
 name: criar-web
-description: Use SEMPRE que for criar do zero qualquer coisa web de cliente na Miner: portal ou app, landing de vertical em lote, cockpit multi-departamento, site institucional, dashboard rápido de leads/funil/kanban, portal guarda-chuva multi-marca, a visão-gestor de um portal, ou um bloco de pré-orçamento. Dispara com "cria um portal/site/app/landing/cockpit/dashboard do <cliente>", "monta o site do <cliente>", "gera as LPs das verticais", "portal multi-marca", "guarda-chuva de marcas", "visão gestor", "placar dos vendedores no portal", "pré-orçamento sem Excel", "ACSC-OPS-001", "começa o <projeto> do zero". Nasce no padrão (repo + Vercel + Supabase + favicon Miner + KV + domínio + gate). NÃO é editar web que já existe (isso é [[conserta-web]], [[faxina-web]] ou [[blindar]]).
+description: Use SEMPRE que for criar do zero qualquer coisa web de cliente na Miner: portal ou app, landing de vertical em lote, cockpit multi-departamento, site institucional, dashboard rápido de leads/funil/kanban, portal guarda-chuva multi-marca, a visão-gestor de um portal, um bloco de pré-orçamento, ou a plataforma de execução de um evento multi-fornecedor. Dispara com "cria um portal/site/app/landing/cockpit/dashboard do <cliente>", "monta o site do <cliente>", "gera as LPs das verticais", "portal multi-marca", "guarda-chuva de marcas", "visão gestor", "placar dos vendedores no portal", "pré-orçamento sem Excel", "ACSC-OPS-001", "plataforma do evento do <cliente>", "portal do festival/evento", "central do evento", "começa o <projeto> do zero". Nasce no padrão (repo + Vercel + Supabase + favicon Miner + KV + domínio + gate). NÃO é editar web que já existe (isso é [[conserta-web]], [[faxina-web]] ou [[blindar]]).
 ---
 
 # criar-web: qualquer web de cliente nascendo no padrão Miner
@@ -16,6 +16,7 @@ A Miner cria web de cliente o tempo todo (34+ projetos na Vercel). Sem um trilho
 - **umbrella multi-marca** (umbrella-kit): casca guarda-chuva que hospeda N marcas isoladas.
 - **visão-gestor** (cockpit-gestor): persona de gestão dentro de um portal (meta x realizado, placar, funil).
 - **pré-orçamento** (pre-orcamento): bloco num portal que troca a planilha Excel por registro no Supabase.
+- **plataforma-eventos**: central de execução de evento multi-fornecedor (gate+RBAC 3 papéis, kanban, calendário editorial, patrocinadores, stakeholders, form público de interesse). Clona o template zerado.
 
 ## Quando disparar
 - "cria/monta/começa do zero" um portal, site, app, landing, cockpit, dashboard, umbrella ou pré-orçamento de cliente.
@@ -40,6 +41,7 @@ O que muda por modo:
 - **dashboard rápido:** single-file HTML+JS, views tabela filtrável/funil por etapa/kanban por status, lê a fonte viva por edge. Deploy só se precisar compartilhar. Se serve PII, exige gate ([[blindar]]).
 - **umbrella multi-marca:** casca base + roteamento por marca (`/marca` ou subdomínio) + isolamento de dado por marca. Refs: Portal Guarda-Chuva (separado do portal-accs) e ACCS GP. Teste que a marca A nunca enxerga dado da marca B.
 - **visão-gestor:** dashboard de gestão (não grid de leads) dentro de um portal. Ref canônica: Cockpit do Gestor ACCS em `~/dev/portal-accs/index.html` (`window.GESTOR_COCKPIT`, container `#cn-view-gestor`, `cn_applyPersonaView('gestor')`), fontes `/api/prospec/funil-sf` (PROSPEC_LIVE) + `/api/caca-negocio/pipeline`, metas em `window.PROSPEC_METAS` (300t). 5 KPIs + placar de vendedores + funil do mês.
+- **plataforma-eventos:** clona o template zerado `~/dev/apps/app-plataforma-eventos-base` (github `gustavocoutiinho/app-plataforma-eventos-base`) — cópia funcional do portal do Festival Costume Gourmet com informações zeradas. Vem com: gate Edge fail-closed + RBAC owner/client/provider por área (comercial, comunicacao, imprensa, producao, midiatech), troca de senha obrigatória no 1º acesso, cadastro de acessos owner-only, ~46 seções (kanban, calendário editorial colaborativo, patrocinadores vivos, matriz de stakeholders, cronograma por espaço, influenciadores, encurtador de links com métricas, Sympla, ROI, form público de interesse, leads B2B). Dados em doc-store JSON no Supabase MinerOS via RPCs SECURITY DEFINER, schema versionado em `supabase/migrations/` do template. Ao clonar: copie o working tree SEM o `.git` (histórico novo), troque o prefixo `evt_` por um do cliente (tabelas, RPCs, env vars `EVT_*`, cookie `evt_session`) — o MinerOS é compartilhado, prefixo repetido colide —, gere `EVT_SECRET`/`EVT_DB_SECRET` novos, rode a migration com o prefixo/segredo do cliente, e siga o "Como clonar" do README do template. Nome `app-<cliente>` ou `evento-<cliente>` · domínio `<cliente>.minerbz.com.br`.
 - **pré-orçamento:** bloco num portal existente que mata a planilha Excel (regra ACSC-OPS-001). Supabase MinerOS: `acsc_preorcamentos` + `acsc_preorcamento_itens` (FK cascade), view `v_acsc_preorcamentos_recentes` (90d), numeração `PO-YYYY-NNNN`, RLS só service_role. Edge `acsc-preorcamento` (guard `?key=`), totais server-side, cross-fill kg↔un por bitola (CA-50/CA-60), pedido mínimo 4.000 kg.
 
 ## Gotchas
@@ -51,6 +53,7 @@ O que muda por modo:
 - Cockpit: aba que nunca carrega dado (painel silencioso) é pior que não ter; valide cada fonte antes de entregar.
 - Visão-gestor: conversão por QUANTIDADE de negócios (~17%), NUNCA por tonelada (positivado_t/orçado_t dá ~2% falso, distorcido por cotações gigantes). Risco/crédito vem do `funil-sf` (`cur.credito`/`cur.recusado`), são toneladas, rotule "t". Motivo de perda é `ClosingReason__c`, não `Loss_Reason__c` (vazio). Não use "pipeline por estágio" (quase tudo fica em "Em Rascunho").
 - Pré-orçamento: totais SEMPRE server-side (o client não fecha conta); tabela é service_role, sem policy anon.
+- Plataforma-eventos: NUNCA reaproveite `EVT_SECRET`/`EVT_DB_SECRET` de outro cliente (o DB_SECRET fica embutido na função `_chk` do Postgres); a senha padrão `TROCAR123` está bloqueada como senha nova em `api/change-password.js`, mude lá se mudar a convenção; qualquer `@minerbz.com.br` loga como owner (regra no `_login2`); e o clone nasce de cópia do working tree, jamais de `git clone` (o histórico do template/cliente anterior não pode viajar junto).
 
 ## O que NÃO fazer
 - NÃO subir projeto sem repo git (quebra "GitHub é a nuvem").
