@@ -56,6 +56,17 @@ Não existe padrão único. Antes de qualquer entrega, saiba qual dos três é:
 
 **Origem:** 10/08/2026, LP SINOBRAS. Header corrigido, commit no GitHub, e a produção continuou com o header velho porque aquele projeto sobe por CLI.
 
+**Como descobrir o modo de verdade, sem chutar:** olhe os deploys de produção na API da Vercel (`list_deployments`) e leia o `meta` de cada um.
+
+| Sinal no `meta` | Significa |
+|---|---|
+| `gitDirty: "1"`, sem `branchAlias`, `actor: claude-code_*` | saiu por **CLI**, da pasta local |
+| `branchAlias`, `repoPushedAt`, `githubRepoVisibility` | saiu por **push do GitHub** |
+
+O campo `githubCommitSha` aparece nos dois casos e **não** indica a origem: num deploy por CLI ele é só o commit que estava na pasta na hora. Confiar nele leva a concluir que o projeto publica por Git quando não publica.
+
+**Origem:** 11/08/2026, accs-eventos. A nota do vault dizia "prod=main", mas os 20 deploys de produção tinham `gitDirty: 1` e nenhum `branchAlias`: o projeto sobe só por CLI. Foi essa leitura errada que deixou a produção correr na frente do git sem ninguém notar.
+
 ---
 
 ## 3b. A produção pode estar ADIANTE do git. Confira antes de pushar
