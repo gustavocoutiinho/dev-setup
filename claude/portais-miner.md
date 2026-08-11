@@ -58,6 +58,26 @@ Não existe padrão único. Antes de qualquer entrega, saiba qual dos três é:
 
 ---
 
+## 3b. A produção pode estar ADIANTE do git. Confira antes de pushar
+
+**Sintoma:** uma rota que não existe no repositório responde 200 em produção. Uma tabela citada só numa migration não commitada já tem dado real no banco. Um cron que não está no `vercel.json` do git está rodando.
+
+**Causa:** deploy por CLI publica a pasta local, não o commit. Quem deployou sem commitar deixou o git atrás do que está no ar.
+
+**Por que é perigoso:** se o projeto também publica por push, o próximo push da `main` republica a versão velha e **apaga do ar** tudo que nunca foi commitado. O portal cai por um commit que parecia inofensivo.
+
+**Regra:** antes de pushar em qualquer portal, confirme que o git bate com a produção. Uma linha resolve:
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' https://<dominio>/api/<rota-que-so-existe-no-local>
+```
+200 numa rota que o git não tem significa que a produção está adiante. Nesse caso, **commitar primeiro, pushar depois**. Nunca o contrário.
+
+**Origem:** 11/08/2026, accs-eventos. 2.590 linhas, 42 rotas novas, 8 migrations e 2 páginas estavam em produção havia dias sem nenhum commit. As tabelas já tinham dado real (`acev_leads_meta_ads` com 6 leads capturados pelo cron). Um push de rotina teria derrubado fila de atendimento, agenda de diretoria, IA e a sincronização do Meta Ads de uma vez.
+
+**Regra irmã:** trabalho que só existe na pasta local não existe. Terminou de deployar, commite.
+
+---
+
 ## 4. Deploy parcial derruba o backend inteiro
 
 **Regra:** em portal que tem `/api`, o deploy sai da pasta completa, com `proxy.js` ou `server.js`, `api/all.js`, `vercel.json` e `package.json`. Nunca de uma pasta que contenha só o `index.html`.
