@@ -27,6 +27,26 @@ done
 CLAUDE_DIR="$HOME/.claude"
 mkdir -p "$CLAUDE_DIR"
 
+# 0) Estaleiro: subagentes (arquiteto, construtor, testes, revisor, sentinela)
+AGENTS_SRC="$DIR/agents"
+AGENTS_DEST="$CLAUDE_DIR/agents"
+if [ -d "$AGENTS_SRC" ]; then
+  mkdir -p "$AGENTS_DEST"
+  n=0
+  for a in "$AGENTS_SRC"/*.md; do
+    [ -f "$a" ] || continue
+    cp "$a" "$AGENTS_DEST/$(basename "$a")"; n=$((n+1))
+  done
+  echo "==> Estaleiro: $n agentes instalados em $AGENTS_DEST"
+fi
+
+# 0b) Canônico dos portais Miner (armadilhas já pagas, lido pelos perfis do Estaleiro)
+if [ -f "$DIR/claude/portais-miner.md" ]; then
+  mkdir -p "$CLAUDE_DIR/estaleiro"
+  cp "$DIR/claude/portais-miner.md" "$CLAUDE_DIR/estaleiro/portais-miner.md"
+  echo "==> Regras de casa dos portais em $CLAUDE_DIR/estaleiro/portais-miner.md"
+fi
+
 # 1) CLAUDE.md global (regras de idioma + escrita)
 if [ -f "$DIR/claude/CLAUDE.md" ]; then
   cp "$DIR/claude/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
