@@ -18,6 +18,13 @@ for s in "$SRC"/*/; do
   echo "  + $name"
 done
 
+# Manifests soltos (ex.: .claude-ads-claude.manifest do pacote ads): copiar junto.
+for m in "$SRC"/.*.manifest "$SRC"/*.manifest; do
+  [ -f "$m" ] || continue
+  cp "$m" "$DEST/$(basename "$m")"
+  echo "  + $(basename "$m")"
+done
+
 # Skills antigas que foram FUNDIDAS na obsidianminer: remover pra não duplicar.
 for old in cerebro-miner vault-context; do
   if [ -d "$DEST/$old" ]; then rm -rf "$DEST/$old"; echo "  - removida (fundida): $old"; fi
@@ -83,6 +90,27 @@ if command -v jq >/dev/null 2>&1 && [ -f "$SETTINGS" ]; then
   else
     rm -f "$tmp"; echo "!! não consegui setar permissão do vault (settings.json)"
   fi
+fi
+
+# 4) permissions.json do repo: união idempotente de allow/deny no settings.json
+# (allowlist que evita prompts repetidos; deny protege contra git destrutivo)
+PERMS="$DIR/claude/permissions.json"
+if [ -f "$PERMS" ] && command -v python3 >/dev/null 2>&1; then
+  python3 - "$SETTINGS" "$PERMS" <<'PY'
+import json, os, sys
+settings_path, perms_path = sys.argv[1], sys.argv[2]
+perms = json.load(open(perms_path)).get("permissions", {})
+settings = {}
+if os.path.exists(settings_path):
+    try: settings = json.load(open(settings_path))
+    except Exception: settings = {}
+sp = settings.setdefault("permissions", {})
+for key in ("allow", "deny"):
+    merged = sorted(set(sp.get(key, [])) | set(perms.get(key, [])))
+    if merged: sp[key] = merged
+json.dump(settings, open(settings_path, "w"), indent=2, ensure_ascii=False)
+print(f"==> permissions: {len(sp.get('allow', []))} allow, {len(sp.get('deny', []))} deny")
+PY
 fi
 
 # --- Plugins de marketplace do Claude Code (merge idempotente no settings.json) ---

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo Aço Cearense — Design System (skeleton)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500;700;900&family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* institucionais */
+    --navy: #223564;
+    --light-blue: #6EAFD5;
+    /* neutros */
+    --black: #000000;
+    --gray: #9D9D9C;
+    --white: #FFFFFF;
+    /* secundarias (bloco principal) */
+    --sec-blue-2: #7DB5DA;
+    --sec-navy-2: #102D69;
+    --sec-green: #00A25E;
+    /* secundarias (faixa) */
+    --sec-teal: #55C0B3;
+    --sec-lime: #94C120;
+    --sec-yellow-restricted: #F8BE38;
+    --sec-coral: #FF5C60;
+    --sec-beige-1: #E1D1B8;
+    --sec-beige-2: #D9BF9E;
+    --sec-brown-1: #5C484A;
+    --sec-brown-2: #8B5843;
+    --sec-lavender: #E3E1E6;
+    /* cor por submarca */
+    --marca-aco-cearense: #4496BB;
+    --marca-sinobras: #CECECE;
+    --marca-florestal: #1D9F61;
+    /* tipografia */
+    --font-display: 'Big Shoulders Display', 'Anton', sans-serif; /* fallback de Herokid */
+    --font-script: 'Yellowtail', 'Sacramento', cursive; /* fallback de Monstane Olstd */
+    --font-body: 'Manrope', system-ui, sans-serif;
+    --font-office: 'Montserrat', Arial, sans-serif;
+    --gradient-institucional: linear-gradient(135deg, var(--light-blue), var(--navy));
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: #f2f2f2;
+    color: var(--navy);
+  }
+  .aviso-fallback {
+    background: #fff3cd;
+    color: #6b5300;
+    font-size: 13px;
+    padding: 10px 24px;
+    text-align: center;
+    font-weight: 700;
+  }
+  section { padding: 56px 40px; }
+  h2.section-title {
+    font-family: var(--font-body);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    color: var(--navy);
+    border-bottom: 2px solid var(--light-blue);
+    padding-bottom: 8px;
+    margin-bottom: 28px;
+  }
+
+  /* ---------- 1. Paleta ---------- */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+  .swatch { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); background: #fff; }
+  .swatch-color { height: 84px; }
+  .swatch-label { padding: 10px 12px; font-size: 12px; line-height: 1.5; }
+  .swatch-label b { display:block; font-size: 13px; margin-bottom: 2px; }
+  .swatch-restricted::after {
+    content: "USO RESTRITO"; display:block; font-size:10px; font-weight:800; color:#8a6d00; letter-spacing: 0.05em;
+  }
+
+  /* ---------- 2. Tipografia ---------- */
+  .type-row { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #e0e0e0; }
+  .type-row .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); font-weight: 700; margin-bottom: 6px; }
+  .display-sample { font-family: var(--font-display); font-weight: 800; font-size: 56px; text-transform: uppercase; color: var(--navy); line-height: 1; }
+  .script-sample { font-family: var(--font-script); font-size: 52px; color: var(--light-blue); }
+  .body-sample { font-family: var(--font-body); font-size: 16px; line-height: 1.6; max-width: 60ch; }
+  .tagline-mista {
+    font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 34px; color: var(--navy);
+  }
+  .tagline-mista .script { font-family: var(--font-script); text-transform: none; color: var(--light-blue); font-size: 44px; font-weight: 400; }
+
+  /* ---------- 3. KV (Key Visual) ---------- */
+  .kv {
+    position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 4px; overflow: hidden;
+    background: var(--navy); display: flex; color: white;
+  }
+  .kv .foto-facetas { flex: 1.4; position: relative; display:flex; }
+  .kv .faceta { flex: 1; position: relative; clip-path: polygon(20% 0, 100% 0, 80% 100%, 0% 100%); margin-left: -8%; }
+  .kv .faceta:first-child { margin-left: 0; clip-path: none; }
+  .kv .faceta.f1 { background: linear-gradient(160deg, #1a2947, var(--navy)); }
+  .kv .faceta.f2 { background: linear-gradient(160deg, #3f5a8c, var(--light-blue)); }
+  .kv .faceta.f3 { background: linear-gradient(160deg, var(--navy), #0e1a33); }
+  .kv .foto-facetas .legenda { position:absolute; bottom:8px; left:12px; font-size:10px; opacity:0.6; }
+  .kv .texto { flex: 1; padding: 28px; display: flex; flex-direction: column; justify-content: center; background: var(--navy); }
+  .kv .hashtag { font-family: var(--font-body); font-weight: 800; font-size: 13px; letter-spacing: 0.04em; margin-bottom: 12px; }
+  .kv .tagline { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(18px, 2.4vw, 26px); line-height: 1.15; color: var(--light-blue); }
+  .kv .tagline .script { font-family: var(--font-script); text-transform: none; color: white; font-size: 1.35em; font-weight: 400; }
+  .kv .rodape { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .kv .url-pill { border: 1px solid rgba(255,255,255,0.6); border-radius: 999px; padding: 6px 14px; font-size: 10px; letter-spacing: 0.04em; }
+  .kv .logo-rodape { height: 22px; filter: brightness(0) invert(1); }
+
+  /* variante ESG (verde) */
+  .kv.esg { background: linear-gradient(135deg, var(--sec-lime), var(--sec-green)); }
+  .kv.esg .tagline { color: var(--navy); }
+  .kv.esg .tagline .script { color: white; }
+  .kv.esg .texto { background: linear-gradient(135deg, var(--sec-lime), var(--sec-green)); }
+
+  /* ---------- 4. Divisor de secao ---------- */
+  .divisor {
+    position: relative; background: var(--navy); color: white; border-radius: 4px; overflow: hidden;
+    padding: 64px 48px; min-height: 260px; display:flex; align-items:flex-end;
+    background-image:
+      linear-gradient(135deg, rgba(110,175,213,0.12) 25%, transparent 25%),
+      linear-gradient(225deg, rgba(110,175,213,0.12) 25%, transparent 25%),
+      linear-gradient(45deg, rgba(110,175,213,0.12) 25%, transparent 25%),
+      linear-gradient(315deg, rgba(110,175,213,0.12) 25%, var(--navy) 25%);
+    background-position: 40px 0, 40px 0, 0 0, 0 0;
+    background-size: 80px 80px;
+    background-repeat: repeat;
+  }
+  .divisor .numero { position:absolute; left: 24px; top: 8px; font-family: var(--font-display); font-size: 220px; font-weight: 900; color: rgba(110,175,213,0.25); line-height:1; }
+  .divisor .titulo { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: 48px; line-height: 1.05; z-index:1; }
+  .divisor .titulo em { font-style: normal; color: var(--light-blue); font-weight: 400; }
+
+  /* ---------- 5. Logos das marcas ---------- */
+  .logos-row { display:flex; gap: 32px; align-items:center; flex-wrap: wrap; background: white; padding: 32px; border-radius: 12px; }
+  .logos-row img { height: 56px; }
+  .logos-row .item { text-align:center; }
+  .logos-row .item .cor-chip { width: 56px; height: 8px; border-radius: 4px; margin: 8px auto 0; }
+
+  /* ---------- 6. Selo de projeto ---------- */
+  .selo { display:flex; align-items:center; gap: 14px; background:white; border-radius: 8px; padding: 14px 20px; border: 1px solid #e2e2e2; width: fit-content; }
+  .selo .icone { width: 40px; height: 40px; border-radius: 6px; background: var(--sec-teal); display:flex; align-items:center; justify-content:center; color:white; font-size: 18px; }
+  .selo .texto-selo { font-family: var(--font-body); line-height: 1.15; }
+  .selo .texto-selo .q { font-weight: 500; color: var(--navy); font-size: 13px; display:block; }
+  .selo .texto-selo .n { font-weight: 800; color: var(--navy); font-size: 15px; display:block; }
+</style>
+</head>
+<body>
+
+<div class="aviso-fallback">
+  Fallback de protótipo: Herokid → Big Shoulders Display · Monstane Olstd → Yellowtail. Pra material oficial final, use os arquivos reais das fontes (pedir ao Gustavo/cliente).
+</div>
+
+<section>
+  <h2 class="section-title">1. Paleta institucional e secundária</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:var(--navy)"></div><div class="swatch-label"><b>Navy institucional</b>#223564 · Pantone 534C</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--light-blue)"></div><div class="swatch-label"><b>Azul-claro institucional</b>#6EAFD5 · Pantone 542C</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--black)"></div><div class="swatch-label" style="color:#fff;background:#111"><b>Preto</b>neutro, só apoio</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--gray)"></div><div class="swatch-label"><b>Cinza</b>#9D9D9C · Cool Gray 7C</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-teal)"></div><div class="swatch-label"><b>Turquesa-rio</b>#55C0B3</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-lime)"></div><div class="swatch-label"><b>Verde-limão</b>#94C120</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-coral)"></div><div class="swatch-label"><b>Coral</b>#FF5C60</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-navy-2)"></div><div class="swatch-label"><b>Azul-marinho profundo</b>#102D69</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-beige-2)"></div><div class="swatch-label"><b>Bege/areia</b>#D9BF9E</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-brown-2)"></div><div class="swatch-label"><b>Terracota</b>#8B5843</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-yellow-restricted)"></div><div class="swatch-label swatch-restricted"><b>Amarelo</b>#F8BE38</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--sec-lavender)"></div><div class="swatch-label"><b>Lavanda claro</b>#E3E1E6</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">2. Tipografia</h2>
+  <div class="type-row">
+    <div class="label">Display (Herokid, fallback Big Shoulders Display)</div>
+    <div class="display-sample">GRUPO AÇO CEARENSE</div>
+  </div>
+  <div class="type-row">
+    <div class="label">Script (Monstane Olstd, fallback Yellowtail — só 1-2 palavras-âncora)</div>
+    <div class="script-sample">gente · constrói</div>
+  </div>
+  <div class="type-row">
+    <div class="label">Composição de tagline (display + script)</div>
+    <div class="tagline-mista">Nossa <span class="script">gente</span> dá liga.<br>Nossa liga <span class="script">constrói</span> o futuro.</div>
+  </div>
+  <div class="type-row">
+    <div class="label">Corpo de texto (Manrope)</div>
+    <div class="body-sample">O Vergalhão SI 50 é um dos produtos que compõem o amplo portfólio do Grupo Aço Cearense, produzido a partir da laminação a quente, seguindo parâmetros de qualidade avaliados em laboratórios internos, atendendo aos requisitos da Norma Brasileira (NBR).</div>
+  </div>
+</section>
+
+<section style="background:var(--navy)">
+  <h2 class="section-title" style="color:white;border-color:var(--light-blue)">3. Key Visual (KV) — estrutura padrão de campanha</h2>
+  <div class="kv" style="margin-bottom:24px">
+    <div class="foto-facetas">
+      <div class="faceta f1"><span class="legenda">foto: colaborador(a) escritório</span></div>
+      <div class="faceta f2"><span class="legenda">foto: operário(a) industrial</span></div>
+      <div class="faceta f3"><span class="legenda">foto: processo/produto</span></div>
+    </div>
+    <div class="texto">
+      <div class="hashtag">#GRUPOAÇOCEARENSE</div>
+      <div class="tagline">Nossa <span class="script">gente</span> dá liga.<br>Nossa liga <span class="script">constrói</span> o futuro.</div>
+      <div class="rodape">
+        <div class="url-pill">grupoacocearense.com.br</div>
+        <img class="logo-rodape" src="img/logos/logo-grupo-horizontal.png" alt="Grupo Aço Cearense">
+      </div>
+    </div>
+  </div>
+  <div class="kv esg">
+    <div class="foto-facetas">
+      <div class="faceta f1" style="background:linear-gradient(160deg,#0a3d24,var(--sec-green))"><span class="legenda">variante ESG/sustentabilidade</span></div>
+      <div class="faceta f2" style="background:linear-gradient(160deg,var(--sec-lime),#0a3d24)"></div>
+      <div class="faceta f3" style="background:linear-gradient(160deg,var(--sec-green),#0a3d24)"></div>
+    </div>
+    <div class="texto">
+      <div class="hashtag">#SINOBRASFLORESTAL</div>
+      <div class="tagline">Sustentabilidade que <span class="script">dá liga</span> ao futuro.</div>
+      <div class="rodape">
+        <div class="url-pill" style="border-color:var(--navy);color:var(--navy)">grupoacocearense.com.br</div>
+        <img class="logo-rodape" style="filter:none" src="img/logos/submarca-florestal-sinobras.png" alt="Florestal Sinobras">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">4. Divisor de seção (capítulo de deck/relatório)</h2>
+  <div class="divisor">
+    <div class="numero">1</div>
+    <div class="titulo">Diretrizes<br><em>da marca</em></div>
+  </div>
+</section>
+
+<section style="background:#e9edf2">
+  <h2 class="section-title">5. As 5 marcas do grupo</h2>
+  <div class="logos-row">
+    <div class="item"><img src="img/logos/logo-grupo-horizontal.png" alt="Grupo Aço Cearense"><div class="cor-chip" style="background:var(--navy)"></div></div>
+    <div class="item"><img src="img/logos/submarca-aco-cearense.png" alt="Aço Cearense"><div class="cor-chip" style="background:var(--marca-aco-cearense)"></div></div>
+    <div class="item"><img src="img/logos/submarca-sinobras.png" alt="Sinobras"><div class="cor-chip" style="background:var(--marca-sinobras)"></div></div>
+    <div class="item"><img src="img/logos/submarca-florestal-sinobras.png" alt="Florestal Sinobras"><div class="cor-chip" style="background:var(--marca-florestal)"></div></div>
+    <div class="item"><img src="img/logos/submarca-instituto.png" alt="Instituto Aço Cearense"><div class="cor-chip" style="background:var(--navy)"></div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">6. Selo de projeto (Manrope Medium + Bold)</h2>
+  <div class="selo">
+    <div class="icone">◆</div>
+    <div class="texto-selo"><span class="q">planejamento</span><span class="n">estratégico</span></div>
+  </div>
+</section>
+
+</body>
+</html>

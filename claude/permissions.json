@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd ~/dev/portais/portal-accs*)",
+      "Bash(curl *)",
+      "Bash(git *)",
+      "Bash(python3 tools/sf-funil-refresh.py*)",
+      "Bash(sf org list*)",
+      "Edit(/Users/gustavocoutinho/ObsidianVaults/miner/**)",
+      "Read(/Users/gustavocoutinho/ObsidianVaults/miner/**)",
+      "Write(/Users/gustavocoutinho/ObsidianVaults/miner/**)",
+      "mcp__232ca901-2285-4fda-8792-ce04bb0787ab__get-inventory-levels",
+      "mcp__232ca901-2285-4fda-8792-ce04bb0787ab__get-shop-info",
+      "mcp__232ca901-2285-4fda-8792-ce04bb0787ab__search_products",
+      "mcp__232ca901-2285-4fda-8792-ce04bb0787ab__switch-shop",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_me",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_my_tasks",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_project",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_projects",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_task",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_tasks",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__get_teams",
+      "mcp__4c9fffca-3b23-419f-88a4-059977f04b8b__search_tasks",
+      "mcp__meta-ads__get_ad_accounts",
+      "mcp__meta-ads__get_campaign_performance",
+      "mcp__meta-ads__get_creative_performance",
+      "mcp__meta-ads__get_insights",
+      "mcp__meta-ads__list_ad_sets",
+      "mcp__meta-ads__list_ads",
+      "mcp__meta-ads__list_campaigns",
+      "mcp__whatsapp__get_chat",
+      "mcp__whatsapp__get_contact_chats",
+      "mcp__whatsapp__get_direct_chat_by_contact",
+      "mcp__whatsapp__get_last_interaction",
+      "mcp__whatsapp__get_message_context",
+      "mcp__whatsapp__list_chats",
+      "mcp__whatsapp__list_messages",
+      "mcp__whatsapp__search_contacts"
+    ],
+    "deny": [
+      "Bash(git branch -D*)",
+      "Bash(git checkout -- *)",
+      "Bash(git clean -f*)",
+      "Bash(git push --force*)",
+      "Bash(git push --force-with-lease*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git restore *)"
+    ]
+  }
+}
