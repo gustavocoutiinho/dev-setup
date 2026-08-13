@@ -39,7 +39,7 @@ Na página de "Diretriz de nomenclatura" (p.10), os exemplos "Aço Cearense Log�
 
 ## Duas marcas citadas sem detalhamento visual
 
-"Rede OCA" e "WMA" aparecem como exemplos reais de marca "endosso distante/independente" (p.10), mas não recebem página, ícone ou paleta própria em nenhum outro trecho das 139 páginas. Se precisar criar algo para elas, confirme com o cliente antes: a skill não tem base para inventar identidade visual pra essas duas.
+"Rede OCA" e "WMA" aparecem como exemplos reais de marca "endosso distante/independente" (p.10), mas não recebem página, ícone ou paleta própria em nenhum outro trecho das 139 páginas. Desde jan/2026 a Rede OCA tem identidade própria documentada fora deste manual (rebranding "OCA lab", apresentação de 52 slides): use a skill `ocadesign`. A WMA segue sem base documentada: confirme com o cliente antes de criar qualquer coisa pra ela.
 
 ## Instituto Aço Cearense sem cor de identificação própria
 

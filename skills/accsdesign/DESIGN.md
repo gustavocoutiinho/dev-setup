@@ -133,4 +133,4 @@ O corte diagonal de 2 cantos arredondados + 2 cantos retos (derivado do símbolo
 - Não distorça, gire, aplique gradiente/sombra ou recolora o logo (são 8 proibições explícitas, ver [references/logo-e-submarcas.md](references/logo-e-submarcas.md)).
 - Não deixe um ícone com mais de uma cor, gradiente, ou fora do grid 24px/1px.
 - Não use travessão (—) em texto algum, nem palavras da lista de proibidas ("único", "premium", "designer", "artesanal", etc. — ver [references/marca-e-verbal.md](references/marca-e-verbal.md)).
-- Não invente cor própria para o Instituto Aço Cearense nem identidade visual para "Rede OCA"/"WMA": não estão documentadas, confirme com o cliente antes.
+- Não invente cor própria para o Instituto Aço Cearense nem identidade visual para "WMA": não estão documentadas, confirme com o cliente antes. A Rede OCA ganhou identidade própria no rebranding de jan/2026 (OCA lab): use a skill `ocadesign`.

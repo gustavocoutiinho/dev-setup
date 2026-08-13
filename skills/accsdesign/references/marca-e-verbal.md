@@ -16,7 +16,7 @@ O Grupo é uma holding com 3 unidades de negócio e 1 área de impacto social. V
 - **SINOBRAS Florestal** (unidade florestal, subordinada à Sinobras): "fornece biorredutor para a produção de aços longos na SINOBRAS."
 - **Instituto Aço Cearense** (braço social): "responsável por colocar em prática atividades que proporcionam transformação e inclusão social com base na educação, saúde, cultura, esporte e empreendedorismo."
 
-Além dessas 5, o documento cita como exemplos de marca **independente/endosso distante**: SINOBRAS, Rede OCA, WMA (estas duas últimas não têm mais detalhamento no manual: se precisar delas, confirme com o cliente antes de desenhar qualquer peça).
+Além dessas 5, o documento cita como exemplos de marca **independente/endosso distante**: SINOBRAS, Rede OCA, WMA. A Rede OCA ganhou identidade própria em jan/2026 (rebranding "OCA lab", doc separado): peças dela são escopo da skill `ocadesign`, não desta. A WMA segue sem detalhamento: se precisar dela, confirme com o cliente antes de desenhar qualquer peça.
 
 ### As 3 categorias de nomenclatura (diretriz de nomenclatura, p.10)
 
