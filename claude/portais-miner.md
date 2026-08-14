@@ -212,3 +212,13 @@ Este arquivo só serve se crescer com a operação. Quando um portal quebrar por
 2. Nunca remova regra existente. Se ficou obsoleta, marque como superada e diga o que a substituiu.
 3. Edite a fonte versionada (`~/dev/dev-setup/claude/portais-miner.md`), commite, e rode `./install-skills.sh` para valer nas duas máquinas.
 4. Se a regra for específica de um projeto, ela vai para a zona proibida do perfil daquele repositório. Aqui ficam só as que valem para mais de um.
+
+## Alarme que só vigia o robô, nunca o resultado (14/08/2026, HDTS)
+
+**Sintoma:** watchdog verde por 23 dias enquanto a captação estava parada. O cron rodava, reportava `ok=true`, lia a planilha inteira e inseria zero lead. Ninguém foi avisado.
+
+**Causa:** o watchdog checava "o robô rodou?" e "a fonte abre?", nunca "entrou registro novo?". Um pipeline pode estar 100% saudável tecnicamente e 100% seco na prática.
+
+**Regra:** todo watchdog de ingestão precisa de uma trava de **frescor do dado**, não só de saúde do processo. Pergunte "faz quantos dias que não entra registro novo?" e mostre isso onde o gestor já olha (topo do painel), não só em log.
+
+**Bônus do mesmo caso:** quando o cliente muda o formulário de captação, confira as colunas da fonte antes de assumir que o campo novo está chegando. Na HDTS o formulário novo tinha CNPJ obrigatório, mas a planilha seguia com `possui_cnpj?` sim/não. O campo prometido nunca chegou.
