@@ -230,3 +230,13 @@ Este arquivo só serve se crescer com a operação. Quando um portal quebrar por
 **Causa:** as telas calculavam inatividade a partir de `updated_at`. Uma migração/backfill escreve centenas de linhas no mesmo instante, então `updated_at` passa a medir o import, não o último contato com o cliente.
 
 **Regra:** tempo de inatividade sai do **último toque real**: a última entrada da tabela de histórico e, se nunca houve toque, a data em que o registro de fato chegou (`created_at`). Nunca de `updated_at` em tabela que sofreu backfill.
+
+## Teste de front passa verde enquanto o banco está furado (17/08/2026, HDTS)
+
+**Sintoma:** 13 testes de permissão verdes, e ainda assim o admin conseguia reabrir um card já fechado, e uma tela mostrava a fila de um papel para outro.
+
+**Causa:** a regra de permissão vivia em dois lugares (TypeScript do app e função SECURITY DEFINER no Postgres). Os testes cobriam só o TypeScript. O banco, que é o portão real quando alguém chama a RPC direto, tinha a regra mais frouxa (`when 'admin' then true`).
+
+**Regra:** quando a mesma regra existe no app e no banco, teste os DOIS. A forma que pega isso é auditoria de matriz contra produção: para cada papel, cada origem e cada destino, comparar o que o app permite com o que o banco permite. Divergência é bug por definição.
+
+**Bônus do mesmo caso:** toda RPC de listagem tem que filtrar pela regra de visibilidade do papel. Basta uma esquecer para o escopo vazar, mesmo com todas as outras corretas.
