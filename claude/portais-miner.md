@@ -222,3 +222,11 @@ Este arquivo só serve se crescer com a operação. Quando um portal quebrar por
 **Regra:** todo watchdog de ingestão precisa de uma trava de **frescor do dado**, não só de saúde do processo. Pergunte "faz quantos dias que não entra registro novo?" e mostre isso onde o gestor já olha (topo do painel), não só em log.
 
 **Bônus do mesmo caso:** quando o cliente muda o formulário de captação, confira as colunas da fonte antes de assumir que o campo novo está chegando. Na HDTS o formulário novo tinha CNPJ obrigatório, mas a planilha seguia com `possui_cnpj?` sim/não. O campo prometido nunca chegou.
+
+## updated_at mede a escrita da linha, não o atendimento (17/08/2026, HDTS)
+
+**Sintoma:** toda conta exibindo exatamente o mesmo "X dias parado", e o número não batia com a realidade do atendimento.
+
+**Causa:** as telas calculavam inatividade a partir de `updated_at`. Uma migração/backfill escreve centenas de linhas no mesmo instante, então `updated_at` passa a medir o import, não o último contato com o cliente.
+
+**Regra:** tempo de inatividade sai do **último toque real**: a última entrada da tabela de histórico e, se nunca houve toque, a data em que o registro de fato chegou (`created_at`). Nunca de `updated_at` em tabela que sofreu backfill.
