@@ -240,3 +240,20 @@ Este arquivo só serve se crescer com a operação. Quando um portal quebrar por
 **Regra:** quando a mesma regra existe no app e no banco, teste os DOIS. A forma que pega isso é auditoria de matriz contra produção: para cada papel, cada origem e cada destino, comparar o que o app permite com o que o banco permite. Divergência é bug por definição.
 
 **Bônus do mesmo caso:** toda RPC de listagem tem que filtrar pela regra de visibilidade do papel. Basta uma esquecer para o escopo vazar, mesmo com todas as outras corretas.
+
+## create or replace function não substitui quando muda o parâmetro (17/08/2026, HDTS)
+
+**Sintoma:** tela inteira caindo com `PGRST203: could not choose the best candidate function`, logo depois de "atualizar" uma RPC.
+
+**Causa:** `create or replace function` só substitui quando a assinatura é idêntica. Ao adicionar um parâmetro, o Postgres cria uma SOBRECARGA, e o PostgREST não consegue escolher entre as duas.
+
+**Regra:** ao mudar a lista de parâmetros de uma RPC, `drop function <nome>(<assinatura antiga>)` primeiro. Depois varra `pg_proc` por outras sobrecargas dormindo:
+`select proname, count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' group by proname having count(*)>1;`
+
+## Cruzar cliente por nome aproximado é perigoso (17/08/2026, HDTS)
+
+**Sintoma:** importação de faturamento sem casar com nenhuma conta do funil.
+
+**Causa real:** cliente que já compra normalmente NUNCA passou pelo funil de lead. Não é bug de matching, é ausência de vínculo por natureza.
+
+**Regra:** case só por nome exato normalizado. Aproximação por primeira palavra chegou a casar `M DE OLIVEIRA SILVA` com 343 contas. Para dar utilidade ao dado, crie a conta do cliente que não existe (opt-in) e marque a origem, mas **exclua essa conta do cálculo de conversão do funil**: ela não veio do funil e infla a taxa.
