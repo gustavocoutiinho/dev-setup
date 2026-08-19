@@ -28,6 +28,8 @@ O documento oficial é a **"Apresentação OCA_2025_FINAL_13.01.26.pdf"** (52 sl
 
 ## O design system em uma tela
 
+**Gênero da marca em texto: MASCULINO, sempre "o OCA" (o OCA cota, do OCA, no OCA, pronto), nunca "a OCA"** (regra do Gustavo, 17/08/2026, corrigida em todas as LPs).
+
 **Marca**: OCA lab, hub de inovação do grupo (benchmarks: Cubo Itaú, Açolab, LuizaLabs). Valores: inovação, colaboração, agilidade, coragem. Nome antigo "Rede OCA" e logo antigo (corrente rosa/roxa) aposentados.
 
 **Logo**: wordmark "OCA" (anagrama de ACO na tipografia do logotipo do grupo, A com corte do "K" e pé abaixo da baseline) + "lab" minúsculo à direita. Versões: padrão (gradiente + lab azul-claro, sobre claro), mono navy, negativo (branco em caixa navy), linear, secundárias teal/coral (brindes), branca (sobre foto/escuro).
