@@ -1,0 +1,331 @@
+<title>Ondas do Site GAC</title>
+<style>
+  :root{
+    --navy:#223564; --navy-2:#102D69; --blue:#6EAFD5; --blue-2:#7DB5DA;
+    --teal:#55C0B3; --coral:#FF5C60;
+    --ground:#F4F6FA; --surface:#FFFFFF; --surface-2:#EDF1F7;
+    --ink:#111A2E; --ink-2:#3E4A66; --ink-3:#6B7590;
+    --line:#D5DDEA; --accent:var(--navy); --on-accent:#FFFFFF;
+    --shadow:0 1px 2px rgba(34,53,100,.06), 0 8px 24px rgba(34,53,100,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0C1425; --surface:#141F35; --surface-2:#1B2842;
+      --ink:#EEF2F9; --ink-2:#B9C4D8; --ink-3:#8794AE;
+      --line:#28364F; --accent:var(--blue); --on-accent:#0C1425;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C1425; --surface:#141F35; --surface-2:#1B2842;
+    --ink:#EEF2F9; --ink-2:#B9C4D8; --ink-3:#8794AE;
+    --line:#28364F; --accent:var(--blue); --on-accent:#0C1425;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Manrope","Manrope Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px 96px}
+
+  /* topo com o grafismo diagonal do manual, sangrando pra fora */
+  .top{position:relative;overflow:hidden;background:linear-gradient(135deg,#6EAFD5,#223564);color:#fff}
+  .top::after{
+    content:"";position:absolute;right:-14%;top:-40%;width:60%;height:200%;
+    background:rgba(255,255,255,.07);
+    transform:rotate(18deg);border-radius:120px 0 120px 0;
+  }
+  .top-inner{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:56px 24px 44px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.85;margin:0 0 14px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;font-weight:800;letter-spacing:-.02em;text-wrap:balance;max-width:20ch}
+  .lede{margin:0;max-width:62ch;font-size:17px;color:rgba(255,255,255,.92)}
+  .meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13px;color:rgba(255,255,255,.85)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:-28px 0 48px;box-shadow:var(--shadow);position:relative;z-index:2}
+  .stat{background:var(--surface);padding:20px 22px}
+  .stat b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stat span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px}
+
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 18px}
+  section{margin-bottom:52px}
+
+  .wave{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+  .wave-head{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;padding:22px 24px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .wave-head h3{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .when{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .wave-goal{margin:0;font-size:14px;color:var(--ink-2);flex-basis:100%}
+  .wave-body{padding:8px 24px 22px}
+
+  .row{display:grid;grid-template-columns:180px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:0}
+  .row h4{margin:0;font-size:14px;font-weight:700;color:var(--ink)}
+  .row p{margin:6px 0 0;font-size:14px;color:var(--ink-2)}
+  .ids{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .who{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.03em;
+    padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--ground)}
+  .tag.ok{color:#0C6B5E;background:rgba(85,192,179,.16);border-color:rgba(85,192,179,.4)}
+  .tag.wait{color:#8A3B3F;background:rgba(255,92,96,.14);border-color:rgba(255,92,96,.38)}
+  :root:not([data-theme="light"]) .tag.ok{color:#8DE0D4}
+  :root:not([data-theme="light"]) .tag.wait{color:#FF9B9E}
+  :root[data-theme="dark"] .tag.ok{color:#8DE0D4}
+  :root[data-theme="dark"] .tag.wait{color:#FF9B9E}
+
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:620px}
+  th,td{text-align:left;padding:13px 18px;font-size:14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);background:var(--surface-2);font-weight:700}
+  tr:last-child td{border-bottom:0}
+  td b{font-weight:700}
+
+  .ask{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow)}
+  .ask ul{margin:14px 0 0;padding-left:20px}
+  .ask li{margin-bottom:9px;font-size:14.5px;color:var(--ink-2)}
+  .ask li b{color:var(--ink)}
+
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+  @media (max-width:640px){
+    .row{grid-template-columns:1fr;gap:6px}
+    .stats{margin-top:-20px}
+  }
+</style>
+
+<header class="top">
+  <div class="top-inner">
+    <p class="eyebrow">Grupo Aço Cearense · Miner</p>
+    <h1>Plano de execução do site em quatro ondas</h1>
+    <p class="lede">Consolidação da auditoria de experiência do site institucional com o diagnóstico técnico de performance. Cada onda entrega valor sozinha e nenhuma depende da onda seguinte para funcionar.</p>
+    <div class="meta">
+      <span>Base: 143 pontos mapeados e validados um a um</span>
+      <span>Auditoria: 18 e 19 de agosto de 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat"><b>135</b><span>pontos válidos após checagem</span></div>
+    <div class="stat"><b>24</b><span>prioridade P0</span></div>
+    <div class="stat"><b>69</b><span>prioridade P1</span></div>
+    <div class="stat"><b>42</b><span>prioridade P2</span></div>
+    <div class="stat"><b>8</b><span>descartados na validação</span></div>
+  </div>
+
+  <section>
+    <h2>Como este plano foi montado</h2>
+    <div class="wave">
+      <div class="wave-body">
+        <div class="row">
+          <div><h4>Validação antes da lista</h4></div>
+          <div><p>Cada ponto foi verificado no HTML e com teste no próprio site, não por impressão de tela. Oito achados iniciais caíram nessa checagem, entre eles o menu suspenso e os banners do topo, que funcionam corretamente. O que sobrou está confirmado com evidência.</p></div>
+        </div>
+        <div class="row">
+          <div><h4>Duas frentes que se somam</h4></div>
+          <div><p>O diagnóstico técnico trata de tempo de resposta do servidor, peso de imagem e scripts. Esta auditoria trata do caminho até o pedido de orçamento. As duas se encontram na onda 1, porque a imagem que demora a carregar é ao mesmo tempo um problema de métrica e de percepção.</p></div>
+        </div>
+        <div class="row">
+          <div><h4>Ordem por risco, não por tamanho</h4></div>
+          <div><p>O que é reversível e não toca no formulário vem primeiro. O formulário de orçamento é o canal de entrada de lead, então mexe em janela combinada e com teste de ponta a ponta.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As quatro ondas</h2>
+
+    <article class="wave">
+      <div class="wave-head">
+        <h3>Onda 0 · Fundação</h3>
+        <span class="when">Semana 1</span>
+        <p class="wave-goal">Sem isto, qualquer mudança vira aposta e nenhum ganho é comprovável.</p>
+      </div>
+      <div class="wave-body">
+        <div class="row">
+          <div><h4>Backup e rollback</h4><p class="ids">item 137</p></div>
+          <div><p>Rotina documentada de backup de arquivos e banco, com restauração testada e ponto de restauração nomeado antes da primeira alteração.</p>
+          <div class="who"><span class="tag">Hospedagem</span><span class="tag">Miner</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Baseline de leads</h4><p class="ids">item 89</p></div>
+          <div><p>Volume de pedidos de orçamento dos últimos 90 dias direto do Salesforce. É a régua que vai provar o ganho depois.</p>
+          <div class="who"><span class="tag wait">TI Aço</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Acessos e homologação</h4><p class="ids">itens 86, 74 a 78</p></div>
+          <div><p>Acesso ao Google Tag Manager, à ferramenta da landing do catálogo e ambiente de homologação para as mudanças de maior porte.</p>
+          <div class="who"><span class="tag wait">TI Aço</span><span class="tag wait">Marketing</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Aval técnico das fichas</h4><p class="ids">itens 93, 25</p></div>
+          <div><p>Onze erros de unidade e grafia encontrados dentro das fichas técnicas atuais precisam da confirmação do time técnico antes de irem ao ar corrigidos.</p>
+          <div class="who"><span class="tag wait">Engenharia Aço</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wave">
+      <div class="wave-head">
+        <h3>Onda 1 · Correções e base técnica</h3>
+        <span class="when">Até 30 dias</span>
+        <p class="wave-goal">Tudo reversível, sem reforma de layout. O código já está escrito e testado no site real.</p>
+      </div>
+      <div class="wave-body">
+        <div class="row">
+          <div><h4>Correções de interface</h4><p class="ids">itens 27, 32, 40, 41, 42, 43, 46, 47, 52, 57, 66, 68, 70</p></div>
+          <div><p>Especificações técnicas abertas por padrão, contraste dos botões dentro da norma de acessibilidade, mensagens de erro visíveis no formulário, preenchimento de endereço por CEP, campo Estado deixando de abrir no Acre e correção do aviso de busca vazia.</p>
+          <div class="who"><span class="tag ok">Miner · pronto para publicar</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Produto no pedido de orçamento</h4><p class="ids">itens 33, 87</p></div>
+          <div><p>Hoje quem clica em solicitar orçamento na página de um produto chega a um formulário que não sabe qual produto era. Passa a levar produto e marca, que chegam junto ao Salesforce.</p>
+          <div class="who"><span class="tag ok">Miner · pronto para publicar</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Fichas técnicas em tabela</h4><p class="ids">itens 24, 26, 67, 92</p></div>
+          <div><p>Quinze das vinte e duas fichas já estão convertidas de imagem para tabela real, com os erros corrigidos. Passam a ser lidas por leitor de tela, copiáveis, pesquisáveis e legíveis no celular.</p>
+          <div class="who"><span class="tag ok">Miner · pronto</span><span class="tag wait">Aval da engenharia</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Banner de cookies no celular</h4><p class="ids">itens 59, 60, 71</p></div>
+          <div><p>Os botões se sobrepõem e o banner intercepta o toque no conteúdo abaixo. Recusar não funciona no primeiro toque, o que é problema de uso e de conformidade.</p>
+          <div class="who"><span class="tag wait">Privally</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Performance e busca</h4><p class="ids">itens 22, 94 a 97, 100, 139 a 142</p></div>
+          <div><p>Prioridade de carregamento do banner, dimensões declaradas nas imagens, texto alternativo, marcação de produto para o Google e descrição própria por página.</p>
+          <div class="who"><span class="tag">Miner</span><span class="tag wait">elleven</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Medição ligada</h4><p class="ids">itens 121, 122, 124, 125</p></div>
+          <div><p>Funil montado no analytics, consentimento integrado, origem de campanha chegando ao Salesforce e uso da ferramenta de gravação de sessão que já está instalada e paga.</p>
+          <div class="who"><span class="tag">Miner</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wave">
+      <div class="wave-head">
+        <h3>Onda 2 · Funil de orçamento e catálogo</h3>
+        <span class="when">30 a 60 dias</span>
+        <p class="wave-goal">Onde está a receita. Exige janela combinada e teste de ponta a ponta a cada mudança.</p>
+      </div>
+      <div class="wave-body">
+        <div class="row">
+          <div><h4>Formulário que qualifica</h4><p class="ids">itens 34 a 39, 44, 45, 72, 118</p></div>
+          <div><p>Seleção de produto, quantidade, prazo e local de entrega. Menos campos obrigatórios no primeiro contato, consentimento explícito, página de confirmação e e-mail de retorno com o resumo do pedido.</p>
+          <div class="who"><span class="tag">Miner</span><span class="tag wait">Decisão comercial</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Orçamento em lote</h4><p class="ids">item 109</p></div>
+          <div><p>Montar uma lista com vários produtos e quantidades e enviar de uma vez. Hoje quem precisa de cinco itens preenche o formulário cinco vezes.</p>
+          <div class="who"><span class="tag">Miner</span><span class="tag wait">elleven</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Atendimento no canal certo</h4><p class="ids">itens 114 a 117</p></div>
+          <div><p>O botão de WhatsApp do site é um link solto, enquanto o atendimento roda na Blip. O contato que entra pelo site não cai na fila, não é distribuído e não vira histórico. Entram também horário de atendimento e roteamento por estado e produto.</p>
+          <div class="who"><span class="tag">Miner</span><span class="tag wait">TI Aço</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Catálogo navegável</h4><p class="ids">itens 16 a 19, 21, 30, 64, 91</p></div>
+          <div><p>Grade no lugar do carrossel, filtros por marca e aplicação, busca dentro do catálogo, produtos relacionados e a entrada dos quatro produtos que hoje estão publicados fora de qualquer categoria.</p>
+          <div class="who"><span class="tag wait">elleven</span><span class="tag">Miner</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Busca e conteúdo</h4><p class="ids">itens 53 a 56, 58, 79</p></div>
+          <div><p>Resultado sem duplicidade, produto acima de artigo, página de zero resultados com saída útil e ligação entre os artigos do blog e as páginas de produto.</p>
+          <div class="who"><span class="tag">Miner</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Calculadoras</h4><p class="ids">itens 106, 107</p></div>
+          <div><p>Peso por bitola e conversão de polegada para milímetro. Contas que o comprador faz na mão hoje e que nenhum concorrente regional oferece.</p>
+          <div class="who"><span class="tag">Miner</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wave">
+      <div class="wave-head">
+        <h3>Onda 3 · Conteúdo, autoridade e mercado</h3>
+        <span class="when">60 a 90 dias</span>
+        <p class="wave-goal">O que depende de material do cliente e do time técnico, e o que diferencia a marca de vez.</p>
+      </div>
+      <div class="wave-body">
+        <div class="row">
+          <div><h4>Catálogo completo de verdade</h4><p class="ids">itens 28, 29, 31, 90, 111</p></div>
+          <div><p>Quinze produtos não têm ficha técnica nenhuma, entre eles Telha Trapezoidal, Chapa Galvanizada e Telas e Malhas. Entram bitolas disponíveis, aplicações, ficha em PDF e certificado por produto.</p>
+          <div class="who"><span class="tag wait">Engenharia Aço</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Prova e credibilidade</h4><p class="ids">itens 80 a 82, 128 a 132</p></div>
+          <div><p>Certificações visíveis na página do produto, obras atendidas, números por unidade, governança e canal de denúncias, sala de imprensa e a história dos 46 anos contada.</p>
+          <div class="who"><span class="tag wait">Marketing Aço</span><span class="tag wait">Jurídico</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Caminho por perfil de comprador</h4><p class="ids">itens 15, 83 a 85, 112, 120</p></div>
+          <div><p>A campanha de mídia segmenta revendedor, construtora, engenheiro, mestre de obras e serralheiro. O site trata todos igual. Entram trilhas por perfil, onde comprar, cobertura de entrega e área do revendedor.</p>
+          <div class="who"><span class="tag">Miner</span><span class="tag wait">Comercial Aço</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Mercado externo</h4><p class="ids">itens 102 a 105</p></div>
+          <div><p>A versão em inglês existe e nunca foi auditada. Revisão de cobertura, de termos técnicos e decisão sobre espanhol.</p>
+          <div class="who"><span class="tag">Miner</span><span class="tag wait">Comercial Aço</span></div></div>
+        </div>
+        <div class="row">
+          <div><h4>Melhoria contínua</h4><p class="ids">itens 119, 126, 127, 143</p></div>
+          <div><p>Pesquisa de satisfação após o atendimento, testes de variação no botão principal, monitoramento de páginas quebradas e acompanhamento das métricas de experiência com usuário real.</p>
+          <div class="who"><span class="tag">Miner</span></div></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Quem faz o quê</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Responsável</th><th>Escopo</th><th>Depende de</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Miner</b></td><td>Correções de interface e conteúdo, conversão das fichas, medição, calculadoras, trilhas por perfil, conteúdo de produto</td><td>Acesso publicado e janela combinada</td></tr>
+          <tr><td><b>elleven</b></td><td>Alterações no tema: catálogo em grade, filtros, orçamento em lote, template de busca e de produto</td><td>Definição de escopo e prazo com o cliente</td></tr>
+          <tr><td><b>Engenharia Aço</b></td><td>Aval das fichas corrigidas, specs dos 15 produtos sem ficha, bitolas e aplicações</td><td>Planilhas originais das fichas</td></tr>
+          <tr><td><b>TI Aço</b></td><td>Salesforce, roteamento de lead, integração com a Blip, acesso ao gerenciador de tags</td><td>Definição de campos e regras</td></tr>
+          <tr><td><b>Marketing Aço</b></td><td>Certificados, obras, logos das marcas, imagem oficial dos produtos novos, política de entrega</td><td>Material aprovado</td></tr>
+          <tr><td><b>Privally</b></td><td>Layout e comportamento do banner de consentimento no celular</td><td>Chamado do cliente</td></tr>
+          <tr><td><b>Hospedagem</b></td><td>Backup, cache, atualização do gerenciador de conteúdo, limpeza de cache de borda</td><td>Janela de manutenção</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que está travado hoje</h2>
+    <div class="ask">
+      <p style="margin:0;font-size:14.5px;color:var(--ink-2)">Vinte e quatro pontos não avançam sem material ou decisão de vocês. Reunimos tudo numa lista única para não virar pedido fatiado.</p>
+      <ul>
+        <li><b>Planilhas originais das fichas técnicas</b> de sete produtos, entre eles Metalon Retangular e Bobina Inox. As imagens têm até sessenta linhas em corpo minúsculo e transcrever bitola a partir de imagem tem risco de erro.</li>
+        <li><b>Especificações dos quinze produtos</b> que hoje não têm ficha nenhuma.</li>
+        <li><b>Imagem oficial da Chapa Xadrez</b> e as medidas de largura, comprimento e peso por chapa. O banner da home anuncia o produto e a página ainda não existe.</li>
+        <li><b>Certificados, laudos e material de obras</b> para a frente de credibilidade.</li>
+        <li><b>Decisão comercial</b> sobre reduzir campos do formulário e deixar CPF ou CNPJ opcional no primeiro contato.</li>
+        <li><b>Lista de destinatários por assunto</b> no Fale Conosco e o prazo de resposta que a Aço quer assumir publicamente.</li>
+        <li><b>Lista de revendas por região</b> para a página de onde comprar.</li>
+        <li><b>Acesso ao gerenciador de tags e à ferramenta da landing do catálogo.</b></li>
+        <li><b>Volume de pedidos de orçamento dos últimos 90 dias</b>, para servir de régua do antes e depois.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Miner · auditoria de experiência do site institucional</span>
+    <span>Complementa o diagnóstico técnico de performance</span>
+  </footer>
+</div>
